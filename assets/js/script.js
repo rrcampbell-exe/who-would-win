@@ -11,10 +11,28 @@
             .then(data => {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
                 dRace.forEach(node => { node.textContent = data.results[randomIndex].index
+                let chosenRace = data.results[randomIndex].index
+                console.log(chosenRace)
+                // establish d&d character speed
+                    let apiChosenRace = "https://www.dnd5eapi.co/api/races/" + chosenRace + "/"
+                    fetch(apiChosenRace)
+                    .then(res => res.json())
+                    .then(data => { 
+                        let dSpeed = data.speed
+                        console.log(dSpeed)
+                        // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
+                        if (dSpeed == 25) {
+                            let dSpeedAdj = Math.ceil(Math.random() * dSpeed) + 45
+                            console.log(dSpeedAdj)
+                        } else {
+                            let dSpeedAdj = Math.ceil(Math.random() * dSpeed) + 70
+                            console.log(dSpeedAdj)
+                        }
+                    })
                 })
     })};
 
-    // dRace();
+    dRace();
 
     // establish d&d class
     function dClassEtAl() {
@@ -37,8 +55,6 @@
                             let hpTotal = dLevel * data.hit_die
                             console.log(hpTotal)
                         })
-                // establish d&d speed
-                
                 // establish d&d moveset
 
                 }) 

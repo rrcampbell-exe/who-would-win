@@ -54,12 +54,12 @@
                             console.log(hpTotal)
                         })
                 // establish weapon or spell selection based on class
-                if (chosenClass == ("barbarian" || "fighter" || "monk" || "ranger" || "rogue")) {
+                if (chosenClass == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
                     let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
                     fetch(apiAttackChoice)
                         .then(res => res.json())
                         .then(data => {
-                            let randomIndex = Math.floor(Math.random() * (data.equipment.length))
+                            let randomIndex = Math.floor(Math.random() * (data.equipment.length - 1))
                             let weapon = data.equipment[randomIndex].name.toLowerCase()
                             console.log(weapon);
                         })

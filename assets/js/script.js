@@ -68,8 +68,17 @@
                             .then(res => res.json())
                             .then(data => {
                                 let randomIndex = Math.floor(Math.random() * (data.results.length))
-                                let spell = data.results[randomIndex].index
+                                let spell = data.results[randomIndex].name
+                                let spellIndex = data.results[randomIndex].index
                                 console.log(spell);
+
+                                let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
+                                fetch(apiAttackPower)
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        let spellDamage = data.damage.damage_at_slot_level[5]
+                                        console.log(spellDamage)
+                                    })
                             })
                     }
                 }) 

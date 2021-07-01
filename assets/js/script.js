@@ -10,7 +10,7 @@
             .then(res => res.json())
             .then(data => {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
-                dRace.forEach(node => { node.textContent = data.results[randomIndex].index
+                // dRace.forEach(node => { node.textContent = data.results[randomIndex].index 
                 let chosenRace = data.results[randomIndex].index
                 console.log(chosenRace)
                 // establish d&d character speed
@@ -30,11 +30,9 @@
                         }
                     })
                 })
-    })};
+    };
 
-    dRace();
-
-    // establish d&d class
+    // establish d&d class, descendant attributes
     function dClassEtAl() {
         let apiClass = "https://www.dnd5eapi.co/api/classes/"
         let dClass = document.querySelector(".d-class") // to populate page with chosen class of d&d character
@@ -42,7 +40,7 @@
             .then(res => res.json())
             .then(data => {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
-                dClass.forEach(node => { node.textContent = data.results[randomIndex].index
+                // dClass.forEach(node => { node.textContent = data.results[randomIndex].index
                 let chosenClass = data.results[randomIndex].index
                 console.log(chosenClass)
                 // establish d&d hp
@@ -55,13 +53,29 @@
                             let hpTotal = dLevel * data.hit_die
                             console.log(hpTotal)
                         })
-                // establish d&d moveset
-
+                // establish weapon or spell selection based on class
+                if (chosenClass == ("barbarian" || "fighter" || "monk" || "ranger" || "rogue")) {
+                    let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
+                    fetch(apiAttackChoice)
+                        .then(res => res.json())
+                        .then(data => {
+                            let randomIndex = Math.floor(Math.random() * (data.equipment.length))
+                            let weapon = data.equipment[randomIndex].name.toLowerCase()
+                            console.log(weapon);
+                        })
+                    } else {
+                        let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
+                        fetch(apiAttackChoice)
+                            .then(res => res.json())
+                            .then(data => {
+                                let randomIndex = Math.floor(Math.random() * (data.results.length))
+                                let spell = data.results[randomIndex].index
+                                console.log(spell);
+                            })
+                    }
                 }) 
         
-    })};
-
-    dClassEtAl();
+    };
 
     // establish pokemon from gen 1
 
@@ -74,3 +88,5 @@
     // function to calculate win probability based on previously establish parameters
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
+dRace();
+dClassEtAl();

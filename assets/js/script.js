@@ -14,23 +14,38 @@
                 })
     })};
 
+    // dRace();
+
     // establish d&d class
-    function dClass() {
+    function dClassEtAl() {
         let apiClass = "https://www.dnd5eapi.co/api/classes/"
-        let dClass = document.querySelectorAll(".d-class") // to populate page with chosen class of d&d character
+        let dClass = document.querySelector(".d-class") // to populate page with chosen class of d&d character
         fetch(apiClass)
             .then(res => res.json())
             .then(data => {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
-                dClass.forEach(node => {node.textContent = data.results[randomIndex].index
-                console.log(data.results[randomIndex].index)
+                dClass.forEach(node => { node.textContent = data.results[randomIndex].index
+                let chosenClass = data.results[randomIndex].index
+                console.log(chosenClass)
+                // establish d&d hp
+                    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
+                    fetch(apiChosenClass)
+                        .then(res => res.json())
+                        .then(data => {
+                            let dLevel = Math.ceil(Math.random() * 5)
+                            console.log(dLevel)
+                            let hpTotal = dLevel * data.hit_die
+                            console.log(hpTotal)
+                        })
+                // establish d&d speed
+                
+                // establish d&d moveset
+
                 }) 
+        
     })};
 
-    // establish d&d hp
-    
-
-    // establish d&d moveset
+    dClassEtAl();
 
     // establish pokemon from gen 1
 

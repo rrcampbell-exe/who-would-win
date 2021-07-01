@@ -76,8 +76,12 @@
                                 fetch(apiAttackPower)
                                     .then(res => res.json())
                                     .then(data => {
-                                        let spellDamage = data.damage.damage_at_slot_level[5]
+                                        let spellDamage = data.damage.damage_at_slot_level[5] // will only work if spell can be cast at level 5
                                         console.log(spellDamage)
+                                        // consider exploring the solutions on this page: https://stackoverflow.com/questions/49684828/how-do-i-select-a-random-object-from-a-json-file-with-javascript
+                                        // if (typeof spellDamage === 'undefined') {
+                                        //     dClassEtAl();
+                                        // }
                                     })
                             })
                     }

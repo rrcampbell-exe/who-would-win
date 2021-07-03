@@ -1,4 +1,21 @@
-// SPACE FOR UNIVERSAL VARIABLES AND CONSTANTS
+// UNIVERSAL VARIABLES AND CONSTANTS
+var dCharInfo = {
+    characterRace: "",
+    // characterSpeed: dSpeed(),
+    // characterClass: dClass(),
+    // characterLevel: dLevel(),
+    // characterHp: dCharHp(),
+    // characterAttackName: dAttack(),
+    // characterAttackPower: dAttackPower(),
+}
+
+// var pokeInfo = {
+//     pokeName: pokeChoice(),
+//     pokeHp: pokeHp(),
+//     pokeSpeed: pokeSpeed(),
+//     pokeAttackName: pokeAttack(),
+//     pokeAttackPower: pokeAttackPower(),
+// }
 
 // FUNCTIONS FOR COMBATANT GENERATION
 
@@ -11,23 +28,30 @@ function dRace() {
         .then(data => {
             let randomIndex = Math.floor(Math.random() * (data.results.length))
             // dRace.forEach(node => { node.textContent = data.results[randomIndex].index 
-            let chosenRace = data.results[randomIndex].index
-            console.log(chosenRace)
-            // establish d&d character speed
-            let apiChosenRace = "https://www.dnd5eapi.co/api/races/" + chosenRace + "/"
-            fetch(apiChosenRace)
-                .then(res => res.json())
-                .then(data => {
-                    let dSpeed = data.speed
-                    // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
-                    if (dSpeed == 25) {
-                        let dSpeedAdj = Math.ceil(Math.random() * dSpeed) + 45
-                        console.log(dSpeedAdj)
-                    } else {
-                        let dSpeedAdj = Math.ceil(Math.random() * dSpeed) + 70
-                        console.log(dSpeedAdj)
-                    }
-                })
+            dCharInfo.characterRace = data.results[randomIndex].index
+            console.log(dCharInfo.characterRace)
+            console.log(typeof dCharInfo.characterRace)
+            return dCharInfo.characterRace
+        })
+    };
+
+
+// establish d&d character speed
+function dSpeed() {
+    let apiRaceSpecified = "https://www.dnd5eapi.co/api/races/" + dCharInfo.characterRace + "/"
+    fetch(apiRaceSpecified)
+        .then(res => res.json())
+        .then(data => {
+            let dSpeed = data.speed
+            // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
+            if (dSpeed == 25) {
+                let characterSpeed = Math.ceil(Math.random() * dSpeed) + 45
+                console.log(characterSpeed)
+            } else {
+                let characterSpeed = Math.ceil(Math.random() * dSpeed) + 70
+                console.log(characterSpeed)
+            }
+            return characterSpeed
         })
 };
 
@@ -41,15 +65,13 @@ function dClass() {
             var randomIndex = Math.floor(Math.random() * (data.results.length))
             var chosenClass = data.results[randomIndex].index
             console.log(chosenClass)
-            return chosenClass
+            // return chosenClass
         })
     };
     
 // establish d&d level & hp
-function dLevel() {
-    var inheritedClass = dClass();
-    console.log(inheritedClass);
-    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + inheritedClass + "/"
+function dLevel(chosenClass) {
+    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
     fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
@@ -150,6 +172,8 @@ function pokeStats() {
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 dRace();
+console.log(dCharInfo.characterRace);
+dSpeed();
 dClass();
 dLevel();
 pokeStats();

@@ -1,7 +1,7 @@
 // UNIVERSAL VARIABLES AND CONSTANTS
 var dCharInfo = {
     characterRace: "",
-    // characterSpeed: dSpeed(),
+    characterSpeed: "",
     // characterClass: dClass(),
     // characterLevel: dLevel(),
     // characterHp: dCharHp(),
@@ -37,8 +37,8 @@ function dRace() {
 
 
 // establish d&d character speed
-function dSpeed() {
-    let apiRaceSpecified = "https://www.dnd5eapi.co/api/races/" + dCharInfo.characterRace + "/"
+function dSpeed(dCharInfo) {
+    let apiRaceSpecified = "https://www.dnd5eapi.co/api/races/" + dCharInfo + "/"
     fetch(apiRaceSpecified)
         .then(res => res.json())
         .then(data => {
@@ -172,7 +172,7 @@ function pokeStats() {
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 dRace();
-console.log(dCharInfo.characterRace);
+console.log(dCharInfo);
 dSpeed();
 dClass();
 dLevel();

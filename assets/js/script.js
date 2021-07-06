@@ -2,20 +2,20 @@
 var dCharInfo = {
     characterRace: "",
     characterSpeed: "",
-    // characterClass: dClass(),
-    // characterLevel: dLevel(),
-    // characterHp: dCharHp(),
-    // characterAttackName: dAttack(),
-    // characterAttackPower: dAttackPower(),
+    characterClass: "",
+    characterLevel: "",
+    characterHp: "",
+    characterAttackName: "",
+    characterAttackPower: "",
 }
 
-// var pokeInfo = {
-//     pokeName: pokeChoice(),
-//     pokeHp: pokeHp(),
-//     pokeSpeed: pokeSpeed(),
-//     pokeAttackName: pokeAttack(),
-//     pokeAttackPower: pokeAttackPower(),
-// }
+var pokeInfo = {
+    pokeName: "",
+    pokeHp: "",
+    pokeSpeed: "",
+    pokeAttackName: "",
+    pokeAttackPower: "",
+}
 
 // FUNCTIONS FOR COMBATANT GENERATION
 
@@ -33,7 +33,7 @@ function dRace() {
             console.log(typeof dCharInfo.characterRace)
             return dCharInfo.characterRace
         })
-    };
+};
 
 
 // establish d&d character speed
@@ -67,10 +67,10 @@ function dClass() {
             console.log(chosenClass)
             // return chosenClass
         })
-    };
-    
+};
+
 // establish d&d level & hp
-function dLevel(chosenClass) {
+function dLevel(dCharInfo) {
     let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
     fetch(apiChosenClass)
         .then(res => res.json())
@@ -79,43 +79,57 @@ function dLevel(chosenClass) {
             console.log(dLevel)
         })
 };
-        //     let hpTotal = dLevel * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
-        //     console.log(hpTotal)
-        // })
-    
-        // establish weapon or spell selection based on class
-        // if (dClass() == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
-        //     let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
-        //     fetch(apiAttackChoice)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 1))
-        //             let weapon = data.equipment[randomIndex].name.toLowerCase()
-        //             console.log(weapon);
-        //         })
-        // } else {
-        //     let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
-        //     fetch(apiAttackChoice)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             let randomIndex = Math.floor(Math.random() * (data.results.length))
-        //             let spell = data.results[randomIndex].name
-        //             let spellIndex = data.results[randomIndex].index
-        //             console.log(spell);
 
-        //             let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
-        //             fetch(apiAttackPower)
-        //                 .then(res => res.json())
-        //                 .then(data => {
-        //                     let spellDamage = data.damage.damage_at_slot_level[5] // will only work if spell can be cast at level 5
-        //                     console.log(spellDamage)
-        //                     // consider exploring the solutions on this page: https://stackoverflow.com/questions/49684828/how-do-i-select-a-random-object-from-a-json-file-with-javascript
-        //                     // if (typeof spellDamage === 'undefined') {
-        //                     //     dClassEtAl();
-        //                     // }
-        //                 })
-        //         })
-        // }
+// establish d&d hp
+function dCharHp(dCharInfo) {
+    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
+    fetch(apiChosenClass)
+        .then(res => res.json())
+        .then(data => {
+            let hpTotal = dLevel * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
+            console.log(hpTotal)
+        })
+}
+
+// establish weapon or spell selection based on class
+function dAttack(dCharInfo) {
+    if (dClass() == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
+        let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
+        fetch(apiAttackChoice)
+            .then(res => res.json())
+            .then(data => {
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 1))
+                let weapon = data.equipment[randomIndex].name.toLowerCase()
+                console.log(weapon);
+            })
+    } else {
+        let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
+        fetch(apiAttackChoice)
+            .then(res => res.json())
+            .then(data => {
+                let randomIndex = Math.floor(Math.random() * (data.results.length))
+                let spell = data.results[randomIndex].name
+                let spellIndex = data.results[randomIndex].index
+                console.log(spell);
+            })
+    }
+}
+
+// establish d&d character attack power
+function dAttackPower(dCharInfo) {
+    let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
+    fetch(apiAttackPower)
+        .then(res => res.json())
+        .then(data => {
+            let spellDamage = data.damage.damage_at_slot_level[5] // will only work if spell can be cast at level 5
+            console.log(spellDamage)
+            
+            // NEED TO RERUN dAttack() IF dAttackPower() IS UNDEFINED
+            // ELSE, RETURN DICE TYPE && NUMBER OF DICE (USE SPLIT ON "D")
+
+        })
+}
+
 
 // establish pokemon from gen 1
 function pokeStats() {
@@ -171,9 +185,16 @@ function pokeStats() {
 // function to calculate win probability based on previously establish parameters
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
+// d&d character functions
 dRace();
 console.log(dCharInfo);
 dSpeed();
 dClass();
 dLevel();
+dCharHp();
+dAttack();
+dAttackPower();
+
+
+// pokemon functions
 pokeStats();

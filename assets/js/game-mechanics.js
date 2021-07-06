@@ -3,22 +3,33 @@
 // designate first move
 function firstMove() {
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
-        console.log("Pokemon attacks first!")
+        console.log(pokeInfo.pokeName + " attacks first!")
         pokeAttack();
     } else {
-        console.log("D&D character attacks first!")
+        console.log("The " + dCharInfo.characterClass + " attacks first!")
         dAttackMove();
     }
 };
 
+function fightButton () {
+    let buttonHolderEl = document.querySelector("#button-holder")
+    let dButton = document.createElement("button")
+    dButton.textContent = "Let's fight!"
+    dButton.setAttribute("class", "fight-btn")
+    buttonHolderEl.append(dButton);
+    dButton.addEventListener("click", firstMove)
+}
+
+// fight button
+setTimeout(fightButton, 1500)
 
 // poke attack
 function pokeAttack() {
     // generate strength of pokemon attack
-    let pokeAttackDamage = Math.floor(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
+    let pokeAttackDamage = Math.ceil(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
     
     // display attack damage on screen
-    console.log(pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage!")
+    console.log(pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage with " + pokeInfo.pokeAttackName + "!")
 
     // update d&d character HP value
     dCharInfo.characterHp = dCharInfo.characterHp - pokeAttackDamage
@@ -37,10 +48,9 @@ function pokeAttack() {
 function dAttackMove() {
     // generate strenght of d&d character attack
     let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)))
-    console.log(dAttackDamage)
 
     // display attack damage on screen
-    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage!")
+    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!")
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage

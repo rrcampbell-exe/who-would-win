@@ -47,10 +47,8 @@ function dSpeed(race) {
             // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
             if (dSpeed == 25) {
                 characterSpeed = Math.ceil(Math.random() * dSpeed) + 45
-                console.log(characterSpeed)
             } else {
                 characterSpeed = Math.ceil(Math.random() * dSpeed) + 70
-                console.log(characterSpeed)
             }
             dCharInfo.characterSpeed = characterSpeed;
         })
@@ -65,7 +63,6 @@ function dClass() {
         .then(data => {
             var randomIndex = Math.floor(Math.random() * (data.results.length))
             var chosenClass = data.results[randomIndex].index
-            console.log(chosenClass)
             dCharInfo.characterClass = chosenClass
             dLevel(dCharInfo.characterClass)
             dAttack(dCharInfo.characterClass)
@@ -78,7 +75,7 @@ function dLevel(chosenClass) {
     fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
-            let dLevel = Math.ceil(Math.random() * 5)
+            let dLevel = Math.ceil(Math.random() * 5 + 8)
             dCharInfo.characterLevel = dLevel
             dCharHp(dCharInfo.characterClass, dCharInfo.characterLevel)
         })
@@ -121,22 +118,14 @@ function dAttack(chosenClass) {
                 dSpellPower(spellIndex)
             })
     }
-    let buttonHolderEl = document.querySelector("#button-holder")
-    let dButton = document.createElement("button")
-    dButton.textContent = "Let's fight!"
-    dButton.setAttribute("class", "d-go")
-    buttonHolderEl.append(dButton);
-    dButton.addEventListener("click", firstMove)
 }
 
 // establish d&d character weapon attack power
 function dWeaponPower(weaponIndex) {
     let apiAttackPower = "https://www.dnd5eapi.co/api/equipment/" + weaponIndex + "/"
-    console.log(apiAttackPower)
     fetch(apiAttackPower)
         .then(res => res.json())
         .then(data => {
-            console.log(dCharInfo.characterAttackName)
             dCharInfo.characterAttackPower = data.damage.damage_dice
             dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
             dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
@@ -149,7 +138,6 @@ function dSpellPower(spellIndex) {
     fetch(apiAttackPower)
         .then(res => res.json())
         .then(data => {
-            console.log(dCharInfo.characterAttackName)
             if (!data.damage) {
                 dAttack(dCharInfo.characterClass)
                 return
@@ -170,7 +158,6 @@ function pokeChoice() {
         .then(res => res.json())
         .then(data => {
             pokeInfo.pokeName = data.name
-            console.log(pokeInfo.pokeName)
             pokeHpFetch(pokeInfo.pokeName)
             pokeSpeedFetch(pokeInfo.pokeName)
             pokeMoveFetch(pokeInfo.pokeName)
@@ -215,12 +202,11 @@ function pokeMoveFetch(pokemon) {
                     }
                 })
         })
-    // let buttonHolderEl = document.querySelector("#button-holder")
-    // let pokeButton = document.createElement("button")
-    // pokeButton.textContent = pokeInfo.pokeName + " will win!"
-    // pokeButton.setAttribute("class", "pokemon-go")
-    // buttonHolderEl.append(pokeButton);
 }
+
+// CREATE FIGHT BUTTON
+
+
 
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
@@ -232,3 +218,4 @@ console.log(dCharInfo);
 // pokemon functions
 pokeChoice();
 console.log(pokeInfo);
+

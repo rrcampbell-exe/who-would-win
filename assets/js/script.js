@@ -31,27 +31,29 @@ function dRace() {
             dCharInfo.characterRace = data.results[randomIndex].index
             console.log(dCharInfo.characterRace)
             console.log(typeof dCharInfo.characterRace)
-            return dCharInfo.characterRace
+            dSpeed(dCharInfo.characterRace);
         })
 };
 
 
 // establish d&d character speed
-function dSpeed(dCharInfo) {
-    let apiRaceSpecified = "https://www.dnd5eapi.co/api/races/" + dCharInfo + "/"
+function dSpeed(race) {
+    let apiRaceSpecified = "https://www.dnd5eapi.co/api/races/" + race + "/"
     fetch(apiRaceSpecified)
         .then(res => res.json())
         .then(data => {
             let dSpeed = data.speed
+            console.log(data, dSpeed)
+            let characterSpeed;
             // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
             if (dSpeed == 25) {
-                let characterSpeed = Math.ceil(Math.random() * dSpeed) + 45
+                characterSpeed = Math.ceil(Math.random() * dSpeed) + 45
                 console.log(characterSpeed)
             } else {
-                let characterSpeed = Math.ceil(Math.random() * dSpeed) + 70
+                characterSpeed = Math.ceil(Math.random() * dSpeed) + 70
                 console.log(characterSpeed)
             }
-            return characterSpeed
+            dCharInfo.characterSpeed = characterSpeed;
         })
 };
 
@@ -65,42 +67,47 @@ function dClass() {
             var randomIndex = Math.floor(Math.random() * (data.results.length))
             var chosenClass = data.results[randomIndex].index
             console.log(chosenClass)
-            // return chosenClass
+            dCharInfo.characterClass = chosenClass
+            dLevel(dCharInfo.characterClass)
+            dAttack(dCharInfo.characterClass)
         })
-};
-
-// establish d&d level & hp
-function dLevel(dCharInfo) {
-    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
-    fetch(apiChosenClass)
+    };
+    
+    // establish d&d level & hp
+    function dLevel(chosenClass) {
+        let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
+        fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
             let dLevel = Math.ceil(Math.random() * 5)
-            console.log(dLevel)
+            dCharInfo.characterLevel = dLevel
+            dCharHp(dCharInfo.characterClass, dCharInfo.characterLevel)
         })
 };
 
 // establish d&d hp
-function dCharHp(dCharInfo) {
+function dCharHp(chosenClass, level) {
     let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
     fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
-            let hpTotal = dLevel * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
-            console.log(hpTotal)
+            console.log(data)
+            let hpTotal = level * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
+            dCharInfo.characterHp = hpTotal
         })
 }
 
 // establish weapon or spell selection based on class
-function dAttack(dCharInfo) {
-    if (dClass() == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
+function dAttack(chosenClass) {
+    // debugger;
+    if (chosenClass == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
         let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
         fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
                 let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 1))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
-                console.log(weapon);
+                dCharInfo.characterAttackName = weapon;
             })
     } else {
         let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
@@ -110,19 +117,28 @@ function dAttack(dCharInfo) {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
                 let spell = data.results[randomIndex].name
                 let spellIndex = data.results[randomIndex].index
-                console.log(spell);
+                dCharInfo.characterAttackName = spell;
+                dAttackPower(spellIndex)
             })
     }
 }
 
 // establish d&d character attack power
-function dAttackPower(dCharInfo) {
+function dAttackPower(spellIndex) {
     let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
     fetch(apiAttackPower)
         .then(res => res.json())
         .then(data => {
-            let spellDamage = data.damage.damage_at_slot_level[5] // will only work if spell can be cast at level 5
-            console.log(spellDamage)
+            console.log(dCharInfo.characterAttackName)
+            if(!data.damage) {
+                dAttack(dCharInfo.characterClass)
+                return
+            }
+            let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
+            console.log(Object.keys(spellDamage)[0]) 
+            console.log(Object.keys(spellDamage), spellDamage[Object.keys(spellDamage)[0]]) 
+            // will only work if spell can be cast at level 5
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[0]];
             
             // NEED TO RERUN dAttack() IF dAttackPower() IS UNDEFINED
             // ELSE, RETURN DICE TYPE && NUMBER OF DICE (USE SPLIT ON "D")
@@ -187,13 +203,12 @@ function pokeStats() {
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 // d&d character functions
 dRace();
-console.log(dCharInfo);
-dSpeed();
+// console.log(dCharInfo);
 dClass();
-dLevel();
-dCharHp();
-dAttack();
-dAttackPower();
+// dLevel();
+// dCharHp();
+// dAttack();
+// dAttackPower();
 
 
 // pokemon functions

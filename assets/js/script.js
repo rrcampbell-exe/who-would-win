@@ -3,6 +3,7 @@
 // FUNCTIONS FOR COMBATANT GENERATION
 
     // establish d&d race
+    
     function dRace() {
         let apiRace = "https://www.dnd5eapi.co/api/races/"
         let dRace = document.querySelector(".d-race") // to populate page with chosen race of d&d character

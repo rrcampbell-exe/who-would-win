@@ -121,6 +121,12 @@ function dAttack(chosenClass) {
                 dSpellPower(spellIndex)
             })
     }
+    let buttonHolderEl = document.querySelector("#button-holder")
+    let dButton = document.createElement("button")
+    dButton.textContent = "Let's fight!"
+    dButton.setAttribute("class", "d-go")
+    buttonHolderEl.append(dButton);
+    dButton.addEventListener("click", firstMove)
 }
 
 // establish d&d character weapon attack power
@@ -209,21 +215,12 @@ function pokeMoveFetch(pokemon) {
                     }
                 })
         })
+    // let buttonHolderEl = document.querySelector("#button-holder")
+    // let pokeButton = document.createElement("button")
+    // pokeButton.textContent = pokeInfo.pokeName + " will win!"
+    // pokeButton.setAttribute("class", "pokemon-go")
+    // buttonHolderEl.append(pokeButton);
 }
-
-// establish power of pokemon move of choice
-// function pokeMovePowerFetch(attackUrl) {
-//     let chosenMoveApi = attackUrl
-//     console.log(attackUrl)
-//     fetch(chosenMoveApi)
-//         .then(res => res.json())
-//         .then(data => {
-//             pokeInfo.pokeAttackPower = data.power
-//             if (pokeInfo.pokeAttackPower == null) {
-//                 pokeMoveFetch(); // don't do this long-term; need to un-nest fetches and create separate functions so you can call the chosenMove function again here
-//             }
-//         })
-// }
 
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
@@ -235,4 +232,3 @@ console.log(dCharInfo);
 // pokemon functions
 pokeChoice();
 console.log(pokeInfo);
-

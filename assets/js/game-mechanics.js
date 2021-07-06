@@ -16,11 +16,13 @@ function firstMove() {
 function pokeAttack() {
     // generate strength of pokemon attack
     let pokeAttackDamage = Math.floor(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
-    console.log(pokeAttackDamage)
+    
     // display attack damage on screen
+    console.log(pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage!")
 
     // update d&d character HP value
     dCharInfo.characterHp = dCharInfo.characterHp - pokeAttackDamage
+    console.log("The " + dCharInfo.characterClass + " now has " + dCharInfo.characterHp + " HP remaining!")
 
     // continue to d&d attack if d&d character has HP remaining
     if (dCharInfo.characterHp > 0) {
@@ -34,13 +36,15 @@ function pokeAttack() {
 // d&d attack
 function dAttackMove() {
     // generate strenght of d&d character attack
-    let dAttackDamage = (dCharInfo.numberOfDice * Math.ceil(Math.random() * dCharInfo.diceType))
-    console.log(dCharInfo.numberOfDice)
+    let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)))
     console.log(dAttackDamage)
+
     // display attack damage on screen
+    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage!")
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage
+    console.log(pokeInfo.pokeName + " now has " + pokeInfo.pokeHp + " HP remaining!")
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
@@ -83,5 +87,3 @@ function endBattle(){
         // clear save data for pokemon (loser goes home)
     }
 };
-
-firstMove();

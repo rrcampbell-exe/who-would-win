@@ -32,7 +32,7 @@ function pokeAttack() {
 // d&d attack
 function dAttackMove() {
     // generate strenght of d&d character attack
-    let dAttackDamage = (numberOfdice * Math.ceil(Math.random() * diceType))
+    let dAttackDamage = (numberOfDice * Math.ceil(Math.random() * diceType))
     console.log(dAttackDamage)
     // display attack damage on screen
 

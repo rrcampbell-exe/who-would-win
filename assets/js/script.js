@@ -7,6 +7,8 @@ var dCharInfo = {
     characterHp: "",
     characterAttackName: "",
     characterAttackPower: "",
+    numberOfDice: "",
+    diceType: "",
 }
 
 var pokeInfo = {
@@ -137,10 +139,11 @@ function dAttackPower(spellIndex) {
             let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
             console.log(Object.keys(spellDamage)[0]) 
             console.log(Object.keys(spellDamage), spellDamage[Object.keys(spellDamage)[0]]) 
-            // will only work if spell can be cast at level 5
-            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[0]];
-            
-            // NEED TO RERUN dAttack() IF dAttackPower() IS UNDEFINED
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random(spellDamage[Object.keys.length]))]];
+            console.log(Object.keys.length)
+            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
+            dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
+
             // ELSE, RETURN DICE TYPE && NUMBER OF DICE (USE SPLIT ON "D")
 
         })

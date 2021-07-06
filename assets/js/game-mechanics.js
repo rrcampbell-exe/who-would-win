@@ -22,7 +22,7 @@ function pokeAttack() {
 
     // continue to d&d attack if d&d character has HP remaining
     if (dCharInfo.characterHp > 0) {
-        dAttack();
+        dAttackMove();
     } else {
         endBattle();
     }
@@ -30,7 +30,7 @@ function pokeAttack() {
 
 
 // d&d attack
-function dAttack() {
+function dAttackMove() {
     // generate strenght of d&d character attack
     let dAttackDamage = (numberOfdice * Math.ceil(Math.random() * diceType))
     console.log(dAttackDamage)

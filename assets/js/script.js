@@ -31,8 +31,6 @@ function dRace() {
             let randomIndex = Math.floor(Math.random() * (data.results.length))
             // dRace.forEach(node => { node.textContent = data.results[randomIndex].index 
             dCharInfo.characterRace = data.results[randomIndex].index
-            console.log(dCharInfo.characterRace)
-            console.log(typeof dCharInfo.characterRace)
             dSpeed(dCharInfo.characterRace);
         })
 };
@@ -73,12 +71,12 @@ function dClass() {
             dLevel(dCharInfo.characterClass)
             dAttack(dCharInfo.characterClass)
         })
-    };
-    
-    // establish d&d level & hp
-    function dLevel(chosenClass) {
-        let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
-        fetch(apiChosenClass)
+};
+
+// establish d&d level & hp
+function dLevel(chosenClass) {
+    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
+    fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
             let dLevel = Math.ceil(Math.random() * 5)
@@ -93,7 +91,6 @@ function dCharHp(chosenClass, level) {
     fetch(apiChosenClass)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             let hpTotal = level * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
             dCharInfo.characterHp = hpTotal
         })
@@ -132,87 +129,95 @@ function dAttackPower(spellIndex) {
         .then(res => res.json())
         .then(data => {
             console.log(dCharInfo.characterAttackName)
-            if(!data.damage) {
+            if (!data.damage) {
                 dAttack(dCharInfo.characterClass)
                 return
             }
             let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
-            console.log(Object.keys(spellDamage)[0]) 
-            console.log(Object.keys(spellDamage), spellDamage[Object.keys(spellDamage)[0]]) 
-            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random(spellDamage[Object.keys.length]))]];
-            console.log(Object.keys.length)
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys.length)]];
             dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
             dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
-
-            // ELSE, RETURN DICE TYPE && NUMBER OF DICE (USE SPLIT ON "D")
-
         })
 }
 
 
 // establish pokemon from gen 1
-function pokeStats() {
+function pokeChoice() {
     var randomPoke = Math.ceil(Math.random() * 151)
     let pokeApi = `https://pokeapi.co/api/v2/pokemon/${randomPoke}/`
     fetch(pokeApi)
         .then(res => res.json())
         .then(data => {
-            let pokeChoice = data.name
-            console.log(pokeChoice)
-            // establish pokemon hp
-            let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokeChoice + "/"
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let pokeHp = data.stats[0].base_stat
-                    console.log(pokeHp);
-                })
-            // establish pokemon speed
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let pokeSpeed = data.stats[5].base_stat
-                    console.log(pokeSpeed)
-                })
-            // establish pokemon move of choice
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let randomIndex = Math.ceil(Math.random() * (data.moves.length))
-                    let pokeMove = data.moves[randomIndex].move.name
-                    console.log(pokeMove);
-                    // establish power of pokemon's move of choice
-                    let chosenMoveApi = data.moves[randomIndex].move.url
-                    fetch(chosenMoveApi)
-                        .then(res => res.json())
-                        .then(data => {
-                            let pokeMovePower = data.power
-                            console.log(pokeMovePower);
-                            if (pokeMovePower == null) {
-                                pokeStats(); // don't do this long-term; need to un-nest fetches and create separate functions so you can call the chosenMove function again here
-                            }
-                        })
-                })
-
+            pokeInfo.pokeName = data.name
+            console.log(pokeInfo.pokeName)
+            pokeHpFetch(pokeInfo.pokeName)
+            pokeSpeedFetch(pokeInfo.pokeName)
+            pokeMoveFetch(pokeInfo.pokeName)
         })
+};
 
+// establish pokemon hp
+function pokeHpFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            pokeInfo.pokeHp = data.stats[0].base_stat
+        })
 }
 
+// establish pokemon speed
+function pokeSpeedFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            pokeInfo.pokeSpeed = data.stats[5].base_stat
+        })
+}
 
-// FUNCTIONS FOR BATTLE
+// establish pokemon move of choice and attack power
+function pokeMoveFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            let randomIndex = Math.ceil(Math.random() * (data.moves.length))
+            pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
+            let chosenMoveApi = data.moves[randomIndex].move.url
+            fetch(chosenMoveApi)
+                .then(res => res.json())
+                .then(data => {
+                    pokeInfo.pokeAttackPower = data.power
+                    if (pokeInfo.pokeAttackPower == null) {
+                        pokeMoveFetch(); 
+                    }
+                })
+        })
+}
 
-// function to calculate win probability based on previously establish parameters
+// establish power of pokemon move of choice
+// function pokeMovePowerFetch(attackUrl) {
+//     let chosenMoveApi = attackUrl
+//     console.log(attackUrl)
+//     fetch(chosenMoveApi)
+//         .then(res => res.json())
+//         .then(data => {
+//             pokeInfo.pokeAttackPower = data.power
+//             if (pokeInfo.pokeAttackPower == null) {
+//                 pokeMoveFetch(); // don't do this long-term; need to un-nest fetches and create separate functions so you can call the chosenMove function again here
+//             }
+//         })
+// }
+
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 // d&d character functions
 dRace();
-// console.log(dCharInfo);
 dClass();
-// dLevel();
-// dCharHp();
-// dAttack();
-// dAttackPower();
+console.log(dCharInfo);
 
 
 // pokemon functions
-pokeStats();
+pokeChoice();
+console.log(pokeInfo);

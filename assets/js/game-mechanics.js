@@ -3,9 +3,11 @@
 // designate first move
 function firstMove() {
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
+        console.log("Pokemon attacks first!")
         pokeAttack();
     } else {
-        dCharAttack();
+        console.log("D&D character attacks first!")
+        dAttackMove();
     }
 };
 
@@ -32,7 +34,8 @@ function pokeAttack() {
 // d&d attack
 function dAttackMove() {
     // generate strenght of d&d character attack
-    let dAttackDamage = (numberOfDice * Math.ceil(Math.random() * diceType))
+    let dAttackDamage = (dCharInfo.numberOfDice * Math.ceil(Math.random() * dCharInfo.diceType))
+    console.log(dCharInfo.numberOfDice)
     console.log(dAttackDamage)
     // display attack damage on screen
 
@@ -80,3 +83,5 @@ function endBattle(){
         // clear save data for pokemon (loser goes home)
     }
 };
+
+firstMove();

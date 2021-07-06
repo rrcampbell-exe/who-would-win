@@ -43,7 +43,6 @@ function dSpeed(race) {
         .then(res => res.json())
         .then(data => {
             let dSpeed = data.speed
-            console.log(data, dSpeed)
             let characterSpeed;
             // convert speed of d&d character to pokemon equivalent, with max d&d character speed = 100
             if (dSpeed == 25) {
@@ -104,9 +103,11 @@ function dAttack(chosenClass) {
         fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
-                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 1))
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 27))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
+                let weaponIndex = data.equipment[randomIndex].index
                 dCharInfo.characterAttackName = weapon;
+                dWeaponPower(weaponIndex)
             })
     } else {
         let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
@@ -117,13 +118,27 @@ function dAttack(chosenClass) {
                 let spell = data.results[randomIndex].name
                 let spellIndex = data.results[randomIndex].index
                 dCharInfo.characterAttackName = spell;
-                dAttackPower(spellIndex)
+                dSpellPower(spellIndex)
             })
     }
 }
 
-// establish d&d character attack power
-function dAttackPower(spellIndex) {
+// establish d&d character weapon attack power
+function dWeaponPower(weaponIndex) {
+    let apiAttackPower = "https://www.dnd5eapi.co/api/equipment/" + weaponIndex + "/"
+    console.log(apiAttackPower)
+    fetch(apiAttackPower)
+        .then(res => res.json())
+        .then(data => {
+            console.log(dCharInfo.characterAttackName)
+            dCharInfo.characterAttackPower = data.damage.damage_dice
+            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
+            dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
+        })
+}
+
+// establish d&d character spell attack power
+function dSpellPower(spellIndex) {
     let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
     fetch(apiAttackPower)
         .then(res => res.json())
@@ -135,7 +150,7 @@ function dAttackPower(spellIndex) {
             }
             let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
             dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys.length)]];
-            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
+            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0]) 
             dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
         })
 }
@@ -217,7 +232,7 @@ dRace();
 dClass();
 console.log(dCharInfo);
 
-
 // pokemon functions
 pokeChoice();
 console.log(pokeInfo);
+

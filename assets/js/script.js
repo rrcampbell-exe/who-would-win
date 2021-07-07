@@ -69,7 +69,7 @@ function dClass() {
         })
 };
 
-// establish d&d level & hp
+// establish d&d level
 function dLevel(chosenClass) {
     let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
     fetch(apiChosenClass)
@@ -157,6 +157,9 @@ function pokeChoice() {
     fetch(pokeApi)
         .then(res => res.json())
         .then(data => {
+            // if (data.name = "ditto") {
+            //     pokeChoice()
+            // }
             pokeInfo.pokeName = data.name
             pokeHpFetch(pokeInfo.pokeName)
             pokeSpeedFetch(pokeInfo.pokeName)

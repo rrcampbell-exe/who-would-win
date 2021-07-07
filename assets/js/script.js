@@ -193,6 +193,10 @@ function pokeMoveFetch(pokemon) {
     fetch(chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            if (pokemon == "ditto") {
+                pokeChoice()
+                return
+            }
             let randomIndex = Math.ceil(Math.random() * (data.moves.length))
             pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
             let chosenMoveApi = data.moves[randomIndex].move.url

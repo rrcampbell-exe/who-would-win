@@ -100,7 +100,7 @@ function dAttack(chosenClass) {
         fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
-                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 27))
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 28))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
                 let weaponIndex = data.equipment[randomIndex].index
                 dCharInfo.characterAttackName = weapon;
@@ -202,7 +202,7 @@ function pokeMoveFetch(pokemon) {
                     pokeInfo.pokeAttackPower = data.power
                     if (pokeInfo.pokeAttackPower == null) {
                         pokeMoveFetch(); 
-                    }
+                    } 
                 })
         })
 }

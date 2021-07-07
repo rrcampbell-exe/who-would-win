@@ -5,12 +5,8 @@
 }
 
 header {
-    color: rgb(255, 255, 255);
-
-    display: flex;d
+    text-align: center;
+    display: flex;
     flex-direction: column;
 }
 
-header p {
-    text-align: center;
-}

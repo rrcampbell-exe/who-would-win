@@ -1,4 +1,7 @@
 // SPACE FOR UNIVERSAL VARIABLES AND CONSTANTS
+var roundId = function() {
+    for (i = 1; )
+}
 
 // FUNCTIONS FOR COMBATANT GENERATION
 

@@ -1,6 +1,22 @@
-// SPACE FOR UNIVERSAL VARIABLES AND CONSTANTS
-var roundId = function() {
-    for (i = 1; )
+// UNIVERSAL VARIABLES AND CONSTANTS
+var dCharInfo = {
+    characterRace: "",
+    characterSpeed: "",
+    characterClass: "",
+    characterLevel: "",
+    characterHp: "",
+    characterAttackName: "",
+    characterAttackPower: "",
+    numberOfDice: "",
+    diceType: "",
+}
+
+var pokeInfo = {
+    pokeName: "",
+    pokeHp: "",
+    pokeSpeed: "",
+    pokeAttackName: "",
+    pokeAttackPower: "",
 }
 
 // FUNCTIONS FOR COMBATANT GENERATION
@@ -35,118 +51,141 @@ var roundId = function() {
                 })
     };
 
-    // establish d&d class, descendant attributes
-    function dClassEtAl() {
-        let apiClass = "https://www.dnd5eapi.co/api/classes/"
-        let dClass = document.querySelector(".d-class") // to populate page with chosen class of d&d character
-        fetch(apiClass)
+// establish d&d hp
+function dCharHp(chosenClass, level) {
+    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
+    fetch(apiChosenClass)
+        .then(res => res.json())
+        .then(data => {
+            let hpTotal = level * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
+            dCharInfo.characterHp = hpTotal
+        })
+}
+
+// establish weapon or spell selection based on class
+function dAttack(chosenClass) {
+    // debugger;
+    if (chosenClass == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
+        let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
+        fetch(apiAttackChoice)
+            .then(res => res.json())
+            .then(data => {
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 27))
+                let weapon = data.equipment[randomIndex].name.toLowerCase()
+                let weaponIndex = data.equipment[randomIndex].index
+                dCharInfo.characterAttackName = weapon;
+                dWeaponPower(weaponIndex)
+            })
+    } else {
+        let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
+        fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
-                // dClass.forEach(node => { node.textContent = data.results[randomIndex].index
-                let chosenClass = data.results[randomIndex].index
-                console.log(chosenClass)
-                // establish d&d hp
-                    let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
-                    fetch(apiChosenClass)
-                        .then(res => res.json())
-                        .then(data => {
-                            let dLevel = Math.ceil(Math.random() * 5)
-                            console.log(dLevel)
-                            let hpTotal = dLevel * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
-                            console.log(hpTotal)
-                        })
-                // establish weapon or spell selection based on class
-                if (chosenClass == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
-                    let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
-                    fetch(apiAttackChoice)
-                        .then(res => res.json())
-                        .then(data => {
-                            let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 1))
-                            let weapon = data.equipment[randomIndex].name.toLowerCase()
-                            console.log(weapon);
-                        })
-                    } else {
-                        let apiAttackChoice = "https://www.dnd5eapi.co/api/spells"
-                        fetch(apiAttackChoice)
-                            .then(res => res.json())
-                            .then(data => {
-                                let randomIndex = Math.floor(Math.random() * (data.results.length))
-                                let spell = data.results[randomIndex].name
-                                let spellIndex = data.results[randomIndex].index
-                                console.log(spell);
-
-                                let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
-                                fetch(apiAttackPower)
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        let spellDamage = data.damage.damage_at_slot_level[5] // will only work if spell can be cast at level 5
-                                        console.log(spellDamage)
-                                        // consider exploring the solutions on this page: https://stackoverflow.com/questions/49684828/how-do-i-select-a-random-object-from-a-json-file-with-javascript
-                                        // if (typeof spellDamage === 'undefined') {
-                                        //     dClassEtAl();
-                                        // }
-                                    })
-                            })
-                    }
-                }) 
-        
-    };
-
-    // establish pokemon from gen 1
-    function pokeStats () {
-        var randomPoke = Math.ceil(Math.random() * 151)
-        let pokeApi = `https://pokeapi.co/api/v2/pokemon/${randomPoke}/`
-        fetch(pokeApi)
-            .then(res => res.json())
-            .then(data => {
-                let pokeChoice = data.name
-                console.log(pokeChoice)
-            // establish pokemon hp
-            let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokeChoice + "/"
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let pokeHp = data.stats[0].base_stat
-                    console.log(pokeHp);
-                })
-            // establish pokemon speed
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let pokeSpeed = data.stats[5].base_stat
-                    console.log(pokeSpeed)
-                })
-            // establish pokemon move of choice
-            fetch(chosenPokeApi)
-                .then(res => res.json())
-                .then(data => {
-                    let randomIndex = Math.ceil(Math.random() * (data.moves.length))
-                    let pokeMove = data.moves[randomIndex].move.name
-                    console.log(pokeMove);  
-                // establish power of pokemon's move of choice
-                let chosenMoveApi = data.moves[randomIndex].move.url 
-                fetch(chosenMoveApi)
-                    .then(res => res.json())
-                    .then(data => {
-                        let pokeMovePower = data.power
-                        console.log(pokeMovePower);
-                        if (pokeMovePower == null) {
-                            pokeStats(); // don't do this long-term; need to un-nest fetches and create separate functions so you can call the chosenMove function again here
-                        }
-                    })
-                })
-
+                let spell = data.results[randomIndex].name
+                let spellIndex = data.results[randomIndex].index
+                dCharInfo.characterAttackName = spell;
+                dSpellPower(spellIndex)
             })
-
     }
+}
+
+// establish d&d character weapon attack power
+function dWeaponPower(weaponIndex) {
+    let apiAttackPower = "https://www.dnd5eapi.co/api/equipment/" + weaponIndex + "/"
+    fetch(apiAttackPower)
+        .then(res => res.json())
+        .then(data => {
+            dCharInfo.characterAttackPower = data.damage.damage_dice
+            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0])
+            dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
+        })
+}
+
+// establish d&d character spell attack power
+function dSpellPower(spellIndex) {
+    let apiAttackPower = "https://www.dnd5eapi.co/api/spells/" + spellIndex + "/"
+    fetch(apiAttackPower)
+        .then(res => res.json())
+        .then(data => {
+            if (!data.damage) {
+                dAttack(dCharInfo.characterClass)
+                return
+            }
+            let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys.length)]];
+            dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0]) 
+            dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
+        })
+}
 
 
-// FUNCTIONS FOR BATTLE
+// establish pokemon from gen 1
+function pokeChoice() {
+    var randomPoke = Math.ceil(Math.random() * 151)
+    let pokeApi = `https://pokeapi.co/api/v2/pokemon/${randomPoke}/`
+    fetch(pokeApi)
+        .then(res => res.json())
+        .then(data => {
+            pokeInfo.pokeName = data.name
+            pokeHpFetch(pokeInfo.pokeName)
+            pokeSpeedFetch(pokeInfo.pokeName)
+            pokeMoveFetch(pokeInfo.pokeName)
+        })
+};
 
-    // function to calculate win probability based on previously establish parameters
+// establish pokemon hp
+function pokeHpFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            pokeInfo.pokeHp = data.stats[0].base_stat
+        })
+}
+
+// establish pokemon speed
+function pokeSpeedFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            pokeInfo.pokeSpeed = data.stats[5].base_stat
+        })
+}
+
+// establish pokemon move of choice and attack power
+function pokeMoveFetch(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch(chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            let randomIndex = Math.ceil(Math.random() * (data.moves.length))
+            pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
+            let chosenMoveApi = data.moves[randomIndex].move.url
+            fetch(chosenMoveApi)
+                .then(res => res.json())
+                .then(data => {
+                    pokeInfo.pokeAttackPower = data.power
+                    if (pokeInfo.pokeAttackPower == null) {
+                        pokeMoveFetch(); 
+                    }
+                })
+        })
+}
+
+// CREATE FIGHT BUTTON
+
+
+
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
+// d&d character functions
 dRace();
-dClassEtAl();
-pokeStats();
+dClass();
+console.log(dCharInfo);
+
+// pokemon functions
+pokeChoice();
+console.log(pokeInfo);
+

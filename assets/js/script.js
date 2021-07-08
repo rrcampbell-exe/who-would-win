@@ -70,6 +70,14 @@ function dClass() {
         })
 };
 
+// establish d&d image
+function characterImage() {
+    let buttonHolderEl = document.querySelector("#button-holder")
+    let dCharPng = document.createElement("img")
+    dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
+    buttonHolderEl.append(dCharPng)
+}
+
 // establish d&d level
 function dLevel(chosenClass) {
     let apiChosenClass = "https://www.dnd5eapi.co/api/classes/" + chosenClass + "/"
@@ -162,8 +170,23 @@ function pokeChoice() {
             pokeHpFetch(pokeInfo.pokeName)
             pokeSpeedFetch(pokeInfo.pokeName)
             pokeMoveFetch(pokeInfo.pokeName)
+            pokeImage(pokeInfo.pokeName)
         })
 };
+
+// establish pokemon image
+function pokeImage(pokemon) {
+    let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    fetch (chosenPokeApi)
+        .then(res => res.json())
+        .then(data => {
+            let buttonHolderEl = document.querySelector("#button-holder")
+            let pokeImageUrl = data.sprites.front_default
+            let pokePng = document.createElement("img")
+            pokePng.src = pokeImageUrl
+            buttonHolderEl.append(pokePng)
+        }) 
+}
 
 // establish pokemon hp
 function pokeHpFetch(pokemon) {
@@ -222,9 +245,11 @@ function pokeMovePower(moveUrl) {
 // d&d character functions
 dRace();
 dClass();
+setTimeout(characterImage, 1500);
 console.log(dCharInfo);
 
 // pokemon functions
 pokeChoice();
+setTimeout(pokeImage, 1500);
 console.log(pokeInfo);
 

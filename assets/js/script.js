@@ -1,4 +1,5 @@
 // UNIVERSAL VARIABLES AND CONSTANTS
+var battles = [];
 var dCharInfo = {
     characterRace: "",
     characterSpeed: "",
@@ -95,7 +96,6 @@ function dCharHp(chosenClass, level) {
 
 // establish weapon or spell selection based on class
 function dAttack(chosenClass) {
-    // debugger;
     if (chosenClass == "barbarian" || chosenClass == "fighter" || chosenClass == "monk" || chosenClass == "ranger" || chosenClass == "rogue") {
         let apiAttackChoice = "https://www.dnd5eapi.co/api/equipment-categories/weapon"
         fetch(apiAttackChoice)

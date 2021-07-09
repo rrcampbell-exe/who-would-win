@@ -39,6 +39,7 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
+        //battle += 1;
         endBattle();
     }
 }
@@ -68,6 +69,7 @@ function dWeaponAttack() {
     if (pokeInfo.pokeHp > 0) {
         pokeAttack();
     } else {
+        //battle += 1;
         endBattle();
     }
 }
@@ -87,26 +89,54 @@ function dSpellAttack() {
     if (pokeInfo.pokeHp > 0) {
         pokeAttack();
     } else {
+        //battle += 1;
         endBattle();
     }
 }
 
 // ENDGAME MECHANICS
 function endBattle(){
+    // instantiate the battles array
+    var scoreDataObject = {
+        pokemonWin: "",
+        dndWin: ""
+    }
+
+    // push to battles array
+
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
+        window.alert("The " + pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
+        battles.push(scoreDataObject);
+        scoreDataObject.pokemonWin = battles.length;
+        console.log(battles);
 
         // save win to pokemon team, all time
 
 
     } else {
         // declare d&d character the winner
+        window.alert("the " + dCharInfo.characterRace + " has won the battle with the " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
+        battles.push(scoreDataObject);
+        scoreDataObject.dndWin = battles.length;
+        console.log(battles);
 
         // save win to d&d team, all time
 
+    }
+    localStorage.setItem("battles", JSON.stringify(battles));
+
+    //ask player if they would like to play again
+    let playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        setTimeout(fightButton, 1500);
+    }
+    else {
+        window.alert("Thank you for playing WhO wOuLd WiN?! Come again soon!")
     }
 };

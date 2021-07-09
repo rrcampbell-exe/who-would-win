@@ -39,13 +39,42 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
+        //battle += 1;
         endBattle();
     }
 }
 
 
-// d&d attack
+// d&d attack logic
 function dAttackMove() {
+    if (dCharInfo.characterClass == "barbarian" || dCharInfo.characterClass == "fighter" || dCharInfo.characterClass == "monk" || dCharInfo.characterClass == "ranger" || dCharInfo.characterClass == "rogue") {
+        dWeaponAttack();
+    } else {
+        dSpellAttack();
+    }
+}
+
+function dWeaponAttack() {
+    // generate strenght of d&d character attack
+    let dAttackDamage = ((dCharInfo.numberOfDice * (dCharInfo.characterLevel - 8)) * (Math.ceil(Math.random() * dCharInfo.diceType)))
+
+    // display attack damage on screen
+    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!")
+
+    // update pokemon character HP value
+    pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage
+    console.log(pokeInfo.pokeName + " now has " + pokeInfo.pokeHp + " HP remaining!")
+
+    // continue to pokemon attack if pokemon has HP remaining
+    if (pokeInfo.pokeHp > 0) {
+        pokeAttack();
+    } else {
+        //battle += 1;
+        endBattle();
+    }
+}
+
+function dSpellAttack() {
     // generate strenght of d&d character attack
     let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)))
 
@@ -60,6 +89,7 @@ function dAttackMove() {
     if (pokeInfo.pokeHp > 0) {
         pokeAttack();
     } else {
+        //battle += 1;
         endBattle();
     }
 }
@@ -68,32 +98,36 @@ function dAttackMove() {
 function endBattle(){
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
-
-        // add win to pokemon's streak
-
-        // save win to pokemon's streak
+        window.alert("The " + pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
+        battles.push(scoreDataObject);
 
         // save win to pokemon team, all time
-
-        // save pokemon for next battle (winner stays)
-
-        // clear save data for d&d character (loser goes home)
+        scoreDataObject.pokemonWin = battles.length;
+        console.log(battles);
 
     } else {
         // declare d&d character the winner
-
-        // add win to d&d character's streak
-
-        // save win to d&d character's streak
+        window.alert("the " + dCharInfo.characterRace + " has won the battle with the " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
+        battles.push(scoreDataObject);
 
         // save win to d&d team, all time
+        scoreDataObject.dndWin = battles.length;
+        console.log(battles);
 
-        // save d&d character for next battle (winner stays)
+    }
+    localStorage.setItem("battles", JSON.stringify(battles));
 
-        // clear save data for pokemon (loser goes home)
+    //ask player if they would like to play again
+    let playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        firstMove();
+    }
+    else {
+        window.alert("Thank you for playing WhO wOuLd WiN?! Come again soon!")
     }
 };

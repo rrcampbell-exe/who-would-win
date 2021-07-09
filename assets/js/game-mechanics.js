@@ -96,25 +96,16 @@ function dSpellAttack() {
 
 // ENDGAME MECHANICS
 function endBattle(){
-    // instantiate the battles array
-    var scoreDataObject = {
-        pokemonWin: "",
-        dndWin: ""
-    }
-
-    // push to battles array
-
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
         window.alert("The " + pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
         battles.push(scoreDataObject);
-        scoreDataObject.pokemonWin = battles.length;
-        console.log(battles);
 
         // save win to pokemon team, all time
-
+        scoreDataObject.pokemonWin = battles.length;
+        console.log(battles);
 
     } else {
         // declare d&d character the winner
@@ -122,10 +113,10 @@ function endBattle(){
 
         // add win to d&d team, all-time
         battles.push(scoreDataObject);
-        scoreDataObject.dndWin = battles.length;
-        console.log(battles);
 
         // save win to d&d team, all time
+        scoreDataObject.dndWin = battles.length;
+        console.log(battles);
 
     }
     localStorage.setItem("battles", JSON.stringify(battles));
@@ -134,7 +125,7 @@ function endBattle(){
     let playAgainConfirm = window.confirm("Would you like to play again?");
 
     if (playAgainConfirm) {
-        setTimeout(fightButton, 1500);
+        firstMove();
     }
     else {
         window.alert("Thank you for playing WhO wOuLd WiN?! Come again soon!")

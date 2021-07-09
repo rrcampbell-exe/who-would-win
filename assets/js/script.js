@@ -16,6 +16,7 @@ var pokeInfo = {
     pokeHp: "",
     pokeSpeed: "",
     pokeAttackName: "",
+    pokeMoveUrl: "",
     pokeAttackPower: "",
 }
 
@@ -70,7 +71,7 @@ function dAttack(chosenClass) {
         fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
-                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 27))
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 28))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
                 let weaponIndex = data.equipment[randomIndex].index
                 dCharInfo.characterAttackName = weapon;
@@ -160,23 +161,31 @@ function pokeMoveFetch(pokemon) {
     fetch(chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            if (pokemon == "ditto") {
+                pokeChoice()
+                return
+            }
             let randomIndex = Math.ceil(Math.random() * (data.moves.length))
             pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
-            let chosenMoveApi = data.moves[randomIndex].move.url
-            fetch(chosenMoveApi)
-                .then(res => res.json())
-                .then(data => {
-                    pokeInfo.pokeAttackPower = data.power
-                    if (pokeInfo.pokeAttackPower == null) {
-                        pokeMoveFetch(); 
-                    }
-                })
+            pokeInfo.pokeMoveUrl = data.moves[randomIndex].move.url
+            pokeMovePower(pokeInfo.pokeMoveUrl)
+        })
+    }
+
+// establish pokemon move attack power
+function pokeMovePower(moveUrl) {
+    let chosenMoveApi = moveUrl
+    fetch(chosenMoveApi)
+        .then(res => res.json())
+        .then(data => {
+            if (data.power) {
+                pokeInfo.pokeAttackPower = data.power
+            } else {
+                pokeMoveFetch(pokeInfo.pokeName)
+            }
+            console.log(pokeInfo.pokeAttackName, pokeInfo.pokeAttackPower)
         })
 }
-
-// CREATE FIGHT BUTTON
-
-
 
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD

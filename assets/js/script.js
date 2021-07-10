@@ -1,13 +1,5 @@
 // UNIVERSAL VARIABLES AND CONSTANTS
 
-// instantiate the battles array
-var battles = [];
-// assign it a value
-var scoreDataObject = {
-    pokemonWin: "",
-    dndWin: ""
-}
-
 var dCharInfo = {
     characterRace: "",
     characterSpeed: "",

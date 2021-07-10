@@ -39,8 +39,7 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
-        //battle += 1;
-        endBattle();
+        handleBattleEnding(pokeInfo)
     }
 }
 
@@ -70,7 +69,7 @@ function dWeaponAttack() {
         pokeAttack();
     } else {
         //battle += 1;
-        endBattle();
+        handleBattleEnding(dCharInfo)
     }
 }
 
@@ -90,44 +89,66 @@ function dSpellAttack() {
         pokeAttack();
     } else {
         //battle += 1;
-        endBattle();
+        handleBattleEnding(dCharInfo)
     }
+}
+
+// functions made together!!!
+// a function that is called at the end of the battling, that will store the victor and their information into localstorage to be retrievable on page load
+function handleBattleEnding(victorsData) {
+    if (localStorage.getItem('battles') == null) {
+        localStorage.setItem('battles', JSON.stringify([victorsData]))
+    } else {
+        setBattleStorage(victorsData)
+    }
+    endBattle()
+}
+
+function setBattleStorage(dataAboutVictor) {
+        let oldBattles = getBattleStorage() // [{}, {}, ...]
+        oldBattles.push(dataAboutVictor) //old battles plus the latest
+        // this overwrites everything there
+        return localStorage.setItem('battles', JSON.stringify(oldBattles))
+}
+
+function getBattleStorage() {
+    return JSON.parse(localStorage.getItem('battles'))
 }
 
 // ENDGAME MECHANICS
 function endBattle(){
+
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
         window.alert("The " + pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
-        battles.push(scoreDataObject);
+
 
         // save win to pokemon team, all time
-        scoreDataObject.pokemonWin = battles.length;
-        console.log(battles);
 
     } else {
         // declare d&d character the winner
         window.alert("the " + dCharInfo.characterRace + " has won the battle with the " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
-        battles.push(scoreDataObject);
 
         // save win to d&d team, all time
-        scoreDataObject.dndWin = battles.length;
-        console.log(battles);
 
     }
-    localStorage.setItem("battles", JSON.stringify(battles));
 
-    //ask player if they would like to play again
-    let playAgainConfirm = window.confirm("Would you like to play again?");
+    //playAgainConfirm()
+}
+
+//ask player if they would like to play again
+function playAgainConfirm() {
+    let playAgainConfirm = window.confirm("Would you like to play again?")
 
     if (playAgainConfirm) {
+
         firstMove();
     }
     else {
         window.alert("Thank you for playing WhO wOuLd WiN?! Come again soon!")
     }
-};
+}

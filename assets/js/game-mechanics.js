@@ -39,6 +39,7 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
+        pokeInfo.loser = dCharInfo
         handleBattleEnding(pokeInfo)
     }
 }
@@ -69,6 +70,7 @@ function dWeaponAttack() {
         pokeAttack();
     } else {
         //battle += 1;
+        dCharInfo.loser = pokeInfo
         handleBattleEnding(dCharInfo)
     }
 }
@@ -89,6 +91,7 @@ function dSpellAttack() {
         pokeAttack();
     } else {
         //battle += 1;
+        dCharInfo.loser = pokeInfo
         handleBattleEnding(dCharInfo)
     }
 }

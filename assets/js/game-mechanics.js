@@ -139,10 +139,16 @@ function endBattle(){
 
         // add win to pokemon team, all-time
         winTracker.pokeWins = winTracker.pokeWins + 1
+<<<<<<< HEAD
 
 
         // save win to pokemon team, all time
         localStorage.setItem('winTracker', JSON.stringify(winTracker))
+=======
+        console.log(winTracker)
+
+        // save winTracker object
+>>>>>>> ca85c3d16896c53d7cba23ad51ca554997e11f44
 
     } else {
         // declare d&d character the winner
@@ -150,9 +156,15 @@ function endBattle(){
 
         // add win to d&d team, all-time
         winTracker.dWins = winTracker.dWins + 1
+<<<<<<< HEAD
 
         // save win to d&d team, all time
         localStorage.setItem('winTracker', JSON.stringify(winTracker))
+=======
+        console.log(winTracker)
+
+        // save winTracker object
+>>>>>>> ca85c3d16896c53d7cba23ad51ca554997e11f44
 
     }
 

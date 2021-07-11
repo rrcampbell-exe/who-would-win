@@ -125,7 +125,7 @@ function getBattleStorage() {
 function endBattle(){
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
-        window.alert("The " + pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
+        window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
 
@@ -133,7 +133,7 @@ function endBattle(){
 
     } else {
         // declare d&d character the winner
-        window.alert("the " + dCharInfo.characterRace + " has won the battle with the " + pokeInfo.pokeName + "!")
+        window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
 

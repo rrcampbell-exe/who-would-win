@@ -20,6 +20,11 @@ var pokeInfo = {
     pokeAttackPower: "",
 }
 
+var winTracker = {
+    pokeWins: "",
+    dWins: "",
+}
+
 // FUNCTIONS FOR COMBATANT GENERATION
 
 // establish d&d race

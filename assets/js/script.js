@@ -158,6 +158,10 @@ function dSpellPower(spellIndex) {
         })
 }
 
+// capitalize name of pokemon once chosen
+function capitalize (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 // establish pokemon from gen 1
 function pokeChoice() {
@@ -166,11 +170,12 @@ function pokeChoice() {
     fetch(pokeApi)
         .then(res => res.json())
         .then(data => {
-            pokeInfo.pokeName = data.name
-            pokeHpFetch(pokeInfo.pokeName)
-            pokeSpeedFetch(pokeInfo.pokeName)
-            pokeMoveFetch(pokeInfo.pokeName)
-            pokeImage(pokeInfo.pokeName)
+            pokeDataPass = data.name
+            pokeInfo.pokeName = capitalize(data.name)
+            pokeHpFetch(pokeDataPass)
+            pokeSpeedFetch(pokeDataPass)
+            pokeMoveFetch(pokeDataPass)
+            pokeImage(pokeDataPass)
         })
 };
 

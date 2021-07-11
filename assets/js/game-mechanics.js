@@ -128,16 +128,20 @@ function endBattle(){
         window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
+        winTracker.pokeWins = winTracker.pokeWins + 1
+        console.log(winTracker)
 
-        // save win to pokemon team, all time
+        // save winTracker object
 
     } else {
         // declare d&d character the winner
         window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
+        winTracker.dWins = winTracker.dWins + 1
+        console.log(winTracker)
 
-        // save win to d&d team, all time
+        // save winTracker object
 
     }
 

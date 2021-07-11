@@ -141,14 +141,16 @@ function endBattle(){
 
     }
 
-    //playAgainConfirm()
+    playAgainConfirm()
 }
 
-//ask player if they would like to play again
+// ask player if they would like to play again
 function playAgainConfirm() {
     let playAgainConfirm = window.confirm("Would you like to play again?")
 
     if (playAgainConfirm) {
+        $(".fighter-image").remove();
+
         // d&d character functions
         dRace();
         dClass();

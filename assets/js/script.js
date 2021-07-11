@@ -21,8 +21,8 @@ var pokeInfo = {
 }
 
 var winTracker = {
-    pokeWins: "",
-    dWins: "",
+    pokeWins: 0,
+    dWins: 0,
 }
 
 // FUNCTIONS FOR COMBATANT GENERATION

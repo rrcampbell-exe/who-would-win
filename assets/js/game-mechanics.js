@@ -39,9 +39,10 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
-        pokeInfo.winner = pokeInfo.pokeName
-        pokeInfo.loser = dCharInfo
-        handleBattleEnding(pokeInfo)
+        // pokeInfo.winner = pokeInfo.pokeName
+        // pokeInfo.loser = dCharInfo
+        // handleBattleEnding(pokeInfo)
+        endBattle()
     }
 }
 
@@ -71,9 +72,10 @@ function dWeaponAttack() {
         pokeAttack();
     } else {
         //battle += 1;
-        dCharInfo.loser = pokeInfo
-        dCharInfo.winner = dCharInfo.characterClass
-        handleBattleEnding(dCharInfo)
+        // dCharInfo.loser = pokeInfo
+        // dCharInfo.winner = dCharInfo.characterClass
+        // handleBattleEnding(dCharInfo)
+        endBattle()
     }
 }
 
@@ -93,9 +95,10 @@ function dSpellAttack() {
         pokeAttack();
     } else {
         //battle += 1;
-        dCharInfo.loser = pokeInfo
-        dCharInfo.winner = dCharInfo.characterClass
-        handleBattleEnding(dCharInfo)
+        // dCharInfo.loser = pokeInfo
+        // dCharInfo.winner = dCharInfo.characterClass
+        // handleBattleEnding(dCharInfo)
+        endBattle()
     }
 }
 
@@ -118,26 +121,38 @@ function setBattleStorage(dataAboutVictor) {
 }
 
 function getBattleStorage() {
-    return JSON.parse(localStorage.getItem('battles'))
+    return JSON.parse(localStorage.getItem('winTracker'))
 }
 
 // ENDGAME MECHANICS
 function endBattle(){
+    // pull/store the winTracker variable
+    if (localStorage.getItem('winTracker') == null) {
+        localStorage.setItem('winTracker', JSON.stringify(winTracker))
+    } else {
+        winTracker = getBattleStorage()
+    }
+
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
         window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
+        winTracker.pokeWins = winTracker.pokeWins + 1
+
 
         // save win to pokemon team, all time
+        localStorage.setItem('winTracker', JSON.stringify(winTracker))
 
     } else {
         // declare d&d character the winner
         window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
+        winTracker.dWins = winTracker.dWins + 1
 
         // save win to d&d team, all time
+        localStorage.setItem('winTracker', JSON.stringify(winTracker))
 
     }
 

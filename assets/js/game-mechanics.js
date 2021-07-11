@@ -149,8 +149,16 @@ function playAgainConfirm() {
     let playAgainConfirm = window.confirm("Would you like to play again?")
 
     if (playAgainConfirm) {
+        // d&d character functions
+        dRace();
+        dClass();
+        setTimeout(characterImage, 1500);
+        console.log(dCharInfo);
 
-        firstMove();
+        // pokemon functions
+        pokeChoice();
+        setTimeout(pokeImage, 1500);
+        console.log(pokeInfo);
     }
     else {
         window.alert("Thank you for playing WhO wOuLd WiN?! Come again soon!")

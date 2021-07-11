@@ -75,6 +75,7 @@ function characterImage() {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dCharPng = document.createElement("img")
     dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
+    dCharPng.className = "fighter-image"
     buttonHolderEl.append(dCharPng)
 }
 
@@ -108,7 +109,7 @@ function dAttack(chosenClass) {
         fetch(apiAttackChoice)
             .then(res => res.json())
             .then(data => {
-                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 28))
+                let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 29))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
                 let weaponIndex = data.equipment[randomIndex].index
                 dCharInfo.characterAttackName = weapon;
@@ -182,6 +183,7 @@ function pokeImage(pokemon) {
             let buttonHolderEl = document.querySelector("#button-holder")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
+            pokePng.className = "fighter-image"
             pokePng.src = pokeImageUrl
             buttonHolderEl.append(pokePng)
         }) 

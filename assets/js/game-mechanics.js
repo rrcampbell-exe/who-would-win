@@ -164,7 +164,8 @@ function playAgainConfirm() {
     let playAgainConfirm = window.confirm("Would you like to play again?")
 
     if (playAgainConfirm) {
-        $(".fighter-image").remove();
+        $(".d-fighter-image").remove();
+        $(".poke-fighter-image").remove();
 
         // d&d character functions
         dRace();

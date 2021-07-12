@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+.combatant-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .fighter-image {
-    width: 20%;
+    min-width: 240px;
+}
+
+#button-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }

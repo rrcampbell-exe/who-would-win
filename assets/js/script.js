@@ -77,11 +77,11 @@ function dClass() {
 
 // establish d&d image
 function characterImage() {
-    let buttonHolderEl = document.querySelector("#button-holder")
+    let dCombatantEl = document.querySelector("#d-combatant")
     let dCharPng = document.createElement("img")
     dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
-    dCharPng.className = "fighter-image"
-    buttonHolderEl.append(dCharPng)
+    dCharPng.className = "d-fighter-image fighter-image"
+    dCombatantEl.append(dCharPng)
 }
 
 // establish d&d level
@@ -187,15 +187,16 @@ function pokeChoice() {
 // establish pokemon image
 function pokeImage(pokemon) {
     let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
+    console.log(chosenPokeApi)
     fetch (chosenPokeApi)
         .then(res => res.json())
         .then(data => {
-            let buttonHolderEl = document.querySelector("#button-holder")
+            let pokeCombatantEl = document.querySelector("#poke-combatant")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
-            pokePng.className = "fighter-image"
+            pokePng.className = "poke-fighter-image fighter-image"
             pokePng.src = pokeImageUrl
-            buttonHolderEl.append(pokePng)
+            pokeCombatantEl.append(pokePng)
         }) 
 }
 
@@ -226,6 +227,7 @@ function pokeMoveFetch(pokemon) {
         .then(res => res.json())
         .then(data => {
             if (pokemon == "ditto") {
+                $(".poke-fighter-image").remove();
                 pokeChoice()
                 return
             }
@@ -242,10 +244,12 @@ function pokeMovePower(moveUrl) {
     fetch(chosenMoveApi)
         .then(res => res.json())
         .then(data => {
-            if (data.power) {
-                pokeInfo.pokeAttackPower = data.power
+            if (data.power == null) {
+                let pokeLowerCase = pokeInfo.pokeName.toLowerCase()
+                pokeMoveFetch(pokeLowerCase)
+                return
             } else {
-                pokeMoveFetch(pokeInfo.pokeName)
+                pokeInfo.pokeAttackPower = data.power
             }
             console.log(pokeInfo.pokeAttackName, pokeInfo.pokeAttackPower)
         })

@@ -9,6 +9,15 @@
     <!-- link to third-party stylesheet goes here (materialize, etc.) -->
 </head>
 <body>
+    <div class="scoreboard">
+        <section>
+            <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
+        </section>
+
+        <section>
+            <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
+        </section>
+    </div>
     <main class="combatant-container">
         <div id="d-combatant">
             <span id="d-combatant-img"></span>
@@ -27,17 +36,6 @@
     <div id="battle-narration">
         
     </div>
-
-    <div>
-        <section>
-            <div id="pokemon-win"></div>
-        </section>
-
-        <section>
-            <div id="dnd-win"></div>
-        </section>
-    </div>
-
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>

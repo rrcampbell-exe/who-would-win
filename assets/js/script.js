@@ -249,7 +249,7 @@ function pokeMoveFetch(pokemon) {
         .then(res => res.json())
         .then(data => {
             if (pokemon == "ditto") {
-                $(".poke-fighter-image").remove();
+                $(".poke-combatant-img").remove()
                 pokeChoice()
                 return
             }

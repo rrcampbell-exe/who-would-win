@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .combatant-container {
     display: flex;
     flex-wrap: wrap;

@@ -65,7 +65,7 @@ function pokeAttack() {
         dAttackMove();
     } else {
         dCharInfo.characterHp = 0
-        endBattle()
+        setTimeout(endBattle, 2000)
     }
 }
 
@@ -101,7 +101,7 @@ function dWeaponAttack() {
         setTimeout(pokeAttack, 2000)
     } else {
         pokeInfo.pokeHp = 0
-        endBattle()
+        setTimeout(endBattle, 2000)
     }
 }
 
@@ -131,7 +131,7 @@ function dSpellAttack() {
     if (pokeInfo.pokeHp > 0) {
         setTimeout(pokeAttack, 2000)
     } else {
-        endBattle()
+        setTimeout(endBattle, 2000)
     }
 }
 

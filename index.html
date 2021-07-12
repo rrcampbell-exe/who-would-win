@@ -9,7 +9,7 @@
     <!-- link to third-party stylesheet goes here (materialize, etc.) -->
 </head>
 <body>
-    <div class="combatant-container">
+    <main class="combatant-container">
         <div id="d-combatant">
             <span id="d-combatant-img"></span>
             <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
@@ -22,11 +22,13 @@
             <p><span id="poke-name"></span>
             <p>HP: <span id="poke-hp"></span></p>
             <p>Attack: <span id="poke-attack"></span></p>
-        </div>
-            
+        </div>    
+    </main>
+    <div id="battle-narration">
+        
     </div>
 
-    <main>
+    <div>
         <section>
             <div id="pokemon-win"></div>
         </section>
@@ -34,7 +36,7 @@
         <section>
             <div id="dnd-win"></div>
         </section>
-    </main>
+    </div>
 
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>

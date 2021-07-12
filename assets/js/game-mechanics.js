@@ -1,3 +1,7 @@
+// VARIABLES FOR DISPLAY
+
+var battleDispEl = document.querySelector("#battle-narration")
+
 // MECHANICS FOR GAMEPLAY
 
 // designate first move
@@ -21,7 +25,7 @@ function fightButton () {
 }
 
 // fight button
-setTimeout(fightButton, 1500)
+setTimeout(fightButton, 2000)
 
 // poke attack
 function pokeAttack() {
@@ -29,19 +33,20 @@ function pokeAttack() {
     let pokeAttackDamage = Math.ceil(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
     
     // display attack damage on screen
-    console.log(pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage with " + pokeInfo.pokeAttackName + "!")
+    battleDispEl.textContent = ""
+    battleDispEl.textContent = pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage with " + pokeInfo.pokeAttackName + "!"
 
     // update d&d character HP value
     dCharInfo.characterHp = dCharInfo.characterHp - pokeAttackDamage
+
+    // display updated d&d character HP value
     console.log("The " + dCharInfo.characterClass + " now has " + dCharInfo.characterHp + " HP remaining!")
 
     // continue to d&d attack if d&d character has HP remaining
     if (dCharInfo.characterHp > 0) {
-        dAttackMove();
+        setTimeout(dAttackMove, 2000)
     } else {
-        // pokeInfo.winner = pokeInfo.pokeName
-        // pokeInfo.loser = dCharInfo
-        // handleBattleEnding(pokeInfo)
+        dCharInfo.characterHp = 0
         endBattle()
     }
 }
@@ -61,7 +66,8 @@ function dWeaponAttack() {
     let dAttackDamage = ((dCharInfo.numberOfDice * (dCharInfo.characterLevel - 8)) * (Math.ceil(Math.random() * dCharInfo.diceType)))
 
     // display attack damage on screen
-    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!")
+    battleDispEl.textContent = ""
+    battleDispEl.textContent = "The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with their " + dCharInfo.characterAttackName + "!"
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage
@@ -69,12 +75,9 @@ function dWeaponAttack() {
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
-        pokeAttack();
+        setTimeout(pokeAttack, 2000)
     } else {
-        //battle += 1;
-        // dCharInfo.loser = pokeInfo
-        // dCharInfo.winner = dCharInfo.characterClass
-        // handleBattleEnding(dCharInfo)
+        pokeInfo.pokeHp = 0
         endBattle()
     }
 }
@@ -84,7 +87,8 @@ function dSpellAttack() {
     let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)))
 
     // display attack damage on screen
-    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!")
+    battleDispEl.textContent = ""
+    battleDispEl.textContent = "The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!"
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage
@@ -94,23 +98,8 @@ function dSpellAttack() {
     if (pokeInfo.pokeHp > 0) {
         pokeAttack();
     } else {
-        //battle += 1;
-        // dCharInfo.loser = pokeInfo
-        // dCharInfo.winner = dCharInfo.characterClass
-        // handleBattleEnding(dCharInfo)
         endBattle()
     }
-}
-
-// functions made together!!!
-// a function that is called at the end of the battling, that will store the victor and their information into localstorage to be retrievable on page load
-function handleBattleEnding(victorsData) {
-    if (localStorage.getItem('battles') == null) {
-        localStorage.setItem('battles', JSON.stringify([victorsData]))
-    } else {
-        setBattleStorage(victorsData)
-    }
-    endBattle()
 }
 
 function setBattleStorage(dataAboutVictor) {
@@ -135,7 +124,8 @@ function endBattle(){
 
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
-        window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
+        battleDispEl.textContent = ""
+        battleDispEl.textContent = pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!"
 
         // add win to pokemon team, all-time
         winTracker.pokeWins = winTracker.pokeWins + 1
@@ -146,7 +136,8 @@ function endBattle(){
 
     } else {
         // declare d&d character the winner
-        window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
+        battleDispEl.textContent = ""
+        battleDispEl.textContent = "The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!"
 
         // add win to d&d team, all-time
         winTracker.dWins = winTracker.dWins + 1

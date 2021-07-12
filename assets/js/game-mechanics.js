@@ -1,5 +1,4 @@
 // VARIABLES FOR DISPLAY
-
 var battleDispEl = document.querySelector("#battle-narration")
 var pokeHpDisp = document.querySelector("#poke-hp")
 var dHpDisp = document.querySelector("#d-char-hp")
@@ -28,6 +27,7 @@ function firstMove() {
     }
 };
 
+// create fight button
 function fightButton () {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
@@ -37,11 +37,36 @@ function fightButton () {
     dButton.addEventListener("click", firstMove)
 }
 
-// fight button
+// add fight button to page on timer
 setTimeout(fightButton, 2000)
+
+// create next pokemon battle round button
+function nextPokeRound() {
+    $(".fight-btn").remove()
+    let buttonHolderEl = document.querySelector("#button-holder")
+    let dButton = document.createElement("button")
+    dButton.textContent = "Attack, " + pokeInfo.pokeName + "!"
+    dButton.setAttribute("class", "fight-btn")
+    buttonHolderEl.append(dButton);
+    dButton.addEventListener("click", pokeAttack)
+}
+
+// create next dnd battle round button
+function nextDndRound() {
+    $(".fight-btn").remove()
+    let buttonHolderEl = document.querySelector("#button-holder")
+    let dButton = document.createElement("button")
+    dButton.textContent = "Get 'em, " + dCharInfo.characterClass + "!"
+    dButton.setAttribute("class", "fight-btn")
+    buttonHolderEl.append(dButton);
+    dButton.addEventListener("click", dAttackMove)
+}
 
 // poke attack
 function pokeAttack() {
+    // update button on page
+    nextDndRound();
+    
     // generate strength of pokemon attack
     let pokeAttackDamage = Math.ceil(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
     
@@ -62,7 +87,7 @@ function pokeAttack() {
 
     // continue to d&d attack if d&d character has HP remaining
     if (dCharInfo.characterHp > 0) {
-        dAttackMove();
+        nextDndRound();
     } else {
         dCharInfo.characterHp = 0
         setTimeout(endBattle, 2000)
@@ -73,9 +98,9 @@ function pokeAttack() {
 // d&d attack logic
 function dAttackMove() {
     if (dCharInfo.characterClass == "barbarian" || dCharInfo.characterClass == "fighter" || dCharInfo.characterClass == "monk" || dCharInfo.characterClass == "ranger" || dCharInfo.characterClass == "rogue") {
-        setTimeout(dWeaponAttack, 2000);
+        dWeaponAttack();
     } else {
-        setTimeout(dSpellAttack, 2000);
+        dSpellAttack();
     }
 }
 
@@ -98,7 +123,7 @@ function dWeaponAttack() {
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
-        setTimeout(pokeAttack, 2000)
+        nextPokeRound();
     } else {
         pokeInfo.pokeHp = 0
         setTimeout(endBattle, 2000)
@@ -106,6 +131,9 @@ function dWeaponAttack() {
 }
 
 function dSpellAttack() {
+    // update button on page
+    nextPokeRound();
+
     // generate strength of d&d character attack
     if (isNaN(dCharInfo.diceType)) {
         dCharInfo.diceType = 1
@@ -129,7 +157,7 @@ function dSpellAttack() {
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
-        setTimeout(pokeAttack, 2000)
+        nextPokeRound();
     } else {
         setTimeout(endBattle, 2000)
     }
@@ -164,7 +192,7 @@ function endBattle(){
     } else {
         // declare d&d character the winner
         battleDispEl.textContent = ""
-        battleDispEl.textContent = "The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!"
+        battleDispEl.textContent = "The " + dCharInfo.characterRace + " " + dCharInfo.characterClass + " has won the battle with " + pokeInfo.pokeName + "!"
 
         // add win to d&d team, all-time
         winTracker.dWins = winTracker.dWins + 1

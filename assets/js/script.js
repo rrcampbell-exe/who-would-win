@@ -30,13 +30,14 @@ var winTracker = {
 // establish d&d race
 function dRace() {
     let apiRace = "https://www.dnd5eapi.co/api/races/"
-    let dRace = document.querySelector(".d-race") // to populate page with chosen race of d&d character
     fetch(apiRace)
         .then(res => res.json())
         .then(data => {
             let randomIndex = Math.floor(Math.random() * (data.results.length))
-            // dRace.forEach(node => { node.textContent = data.results[randomIndex].index 
             dCharInfo.characterRace = data.results[randomIndex].index
+            let dRaceDispEl = document.querySelector("#d-char-race")
+            dRaceDispEl.textContent = ""
+            dRaceDispEl.append(dCharInfo.characterRace)
             dSpeed(dCharInfo.characterRace);
         })
 };
@@ -69,6 +70,9 @@ function dClass() {
         .then(data => {
             var randomIndex = Math.floor(Math.random() * (data.results.length))
             var chosenClass = data.results[randomIndex].index
+            let dClassDispEl = document.querySelector("#d-char-class")
+            dClassDispEl.textContent = ""
+            dClassDispEl.append(chosenClass)
             dCharInfo.characterClass = chosenClass
             dLevel(dCharInfo.characterClass)
             dAttack(dCharInfo.characterClass)
@@ -104,6 +108,9 @@ function dCharHp(chosenClass, level) {
         .then(data => {
             let hpTotal = level * data.hit_die // currently, hit points are assigned assuming max roll of all hit point dice
             dCharInfo.characterHp = hpTotal
+            let hpDispEl = document.querySelector("#d-char-hp")
+            hpDispEl.textContent = ""
+            hpDispEl.append(dCharInfo.characterHp)
         })
 }
 
@@ -117,7 +124,10 @@ function dAttack(chosenClass) {
                 let randomIndex = Math.ceil(Math.random() * (data.equipment.length - 29))
                 let weapon = data.equipment[randomIndex].name.toLowerCase()
                 let weaponIndex = data.equipment[randomIndex].index
-                dCharInfo.characterAttackName = weapon;
+                dCharInfo.characterAttackName = weapon
+                let dWeaponDispEl = document.querySelector("#d-char-attack")
+                dWeaponDispEl.textContent = "Weapon: "
+                dWeaponDispEl.append(dCharInfo.characterAttackName)
                 dWeaponPower(weaponIndex)
             })
     } else {
@@ -128,7 +138,10 @@ function dAttack(chosenClass) {
                 let randomIndex = Math.floor(Math.random() * (data.results.length))
                 let spell = data.results[randomIndex].name
                 let spellIndex = data.results[randomIndex].index
-                dCharInfo.characterAttackName = spell;
+                dCharInfo.characterAttackName = spell
+                let dSpellDispEl = document.querySelector("#d-char-attack")
+                dSpellDispEl.textContent = "Spell: "
+                dSpellDispEl.append(dCharInfo.characterAttackName)
                 dSpellPower(spellIndex)
             })
     }
@@ -177,6 +190,9 @@ function pokeChoice() {
         .then(data => {
             pokeDataPass = data.name
             pokeInfo.pokeName = capitalize(data.name)
+            let pokeNameDispEl = document.querySelector("#poke-name")
+            pokeNameDispEl.textContent = ""
+            pokeNameDispEl.append(pokeInfo.pokeName)
             pokeHpFetch(pokeDataPass)
             pokeSpeedFetch(pokeDataPass)
             pokeMoveFetch(pokeDataPass)
@@ -207,6 +223,9 @@ function pokeHpFetch(pokemon) {
         .then(res => res.json())
         .then(data => {
             pokeInfo.pokeHp = data.stats[0].base_stat
+            let pokeHpDispEl = document.querySelector("#poke-hp")
+            pokeHpDispEl.textContent = ""
+            pokeHpDispEl.append(pokeInfo.pokeHp)
         })
 }
 
@@ -233,6 +252,9 @@ function pokeMoveFetch(pokemon) {
             }
             let randomIndex = Math.ceil(Math.random() * (data.moves.length))
             pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
+            let pokeAttackDispEl = document.querySelector("#poke-attack")
+            pokeAttackDispEl.textContent = ""
+            pokeAttackDispEl.append(pokeInfo.pokeAttackName)
             pokeInfo.pokeMoveUrl = data.moves[randomIndex].move.url
             pokeMovePower(pokeInfo.pokeMoveUrl)
         })

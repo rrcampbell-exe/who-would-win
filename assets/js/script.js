@@ -247,9 +247,12 @@ function pokeImage(pokemon) {
     fetch (chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            // create img element from front_default sprite
             let pokeCombatantEl = document.querySelector("#poke-combatant-img")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
+
+            // assign classes and src to pokemon image
             pokePng.className = "poke-fighter-image fighter-image"
             pokePng.src = pokeImageUrl
             pokeCombatantEl.append(pokePng)
@@ -262,6 +265,7 @@ function pokeHpFetch(pokemon) {
     fetch(chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            // fetch base stat for hp from poke api, display on page
             pokeInfo.pokeHp = data.stats[0].base_stat
             let pokeHpDispEl = document.querySelector("#poke-hp")
             pokeHpDispEl.textContent = ""
@@ -275,6 +279,7 @@ function pokeSpeedFetch(pokemon) {
     fetch(chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            // fetch base stat for speed from poke api
             pokeInfo.pokeSpeed = data.stats[5].base_stat
         })
 }
@@ -285,16 +290,20 @@ function pokeMoveFetch(pokemon) {
     fetch(chosenPokeApi)
         .then(res => res.json())
         .then(data => {
+            // as ditto only has one non-attacking move available, re-run pokeChoice if ditto is chosen in initial pokeChoice run
             if (pokemon == "ditto") {
                 $("#poke-combatant-img").remove()
                 pokeChoice()
                 return
             }
+            // randomly choose move from pokemon's list of eligible moves
             let randomIndex = Math.ceil(Math.random() * (data.moves.length))
             pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
+            // find poke attack display location, reset textContent (for cases where pokeMoveFetch is re-reun after pokeMovePower returns an attack power of null)
             let pokeAttackDispEl = document.querySelector("#poke-attack")
             pokeAttackDispEl.textContent = ""
             let pokeAttackDisp = pokeInfo.pokeAttackName
+            // remove hyphens from move name, display on page
             pokeAttackDisp = pokeAttackDisp.replace(/-/g, " ")
             pokeAttackDispEl.append(pokeAttackDisp)
             pokeInfo.pokeMoveUrl = data.moves[randomIndex].move.url
@@ -308,17 +317,17 @@ function pokeMovePower(moveUrl) {
     fetch(chosenMoveApi)
         .then(res => res.json())
         .then(data => {
+            // if power of move selected in pokeMoveFetch is null, re-run pokeMoveFetch
             if (data.power == null) {
                 let pokeLowerCase = pokeInfo.pokeName.toLowerCase()
                 pokeMoveFetch(pokeLowerCase)
                 return
             } else {
+                // otherwise, assign poke attack power
                 pokeInfo.pokeAttackPower = data.power
             }
-            console.log(pokeInfo.pokeAttackName, pokeInfo.pokeAttackPower)
         })
 }
-
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 // d&d character functions

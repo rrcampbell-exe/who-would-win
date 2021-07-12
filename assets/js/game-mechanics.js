@@ -90,7 +90,7 @@ function pokeAttack() {
         nextDndRound();
     } else {
         dCharInfo.characterHp = 0
-        setTimeout(endBattle, 2000)
+        endBattle();
     }
 }
 
@@ -106,7 +106,7 @@ function dAttackMove() {
 
 function dWeaponAttack() {
     // generate strength of d&d character attack
-    let dAttackDamage = ((dCharInfo.numberOfDice * (dCharInfo.characterLevel - 8)) * (Math.ceil(Math.random() * dCharInfo.diceType)))
+    let dAttackDamage = ((dCharInfo.numberOfDice * (dCharInfo.characterLevel - 6)) * (Math.ceil(Math.random() * dCharInfo.diceType)))
 
     // display attack damage on screen
     battleDispEl.textContent = ""
@@ -126,20 +126,17 @@ function dWeaponAttack() {
         nextPokeRound();
     } else {
         pokeInfo.pokeHp = 0
-        setTimeout(endBattle, 2000)
+        endBattle();
     }
 }
 
 function dSpellAttack() {
-    // update button on page
-    nextPokeRound();
-
     // generate strength of d&d character attack
     if (isNaN(dCharInfo.diceType)) {
         dCharInfo.diceType = 1
     }
 
-    let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)))
+    let dAttackDamage = (dCharInfo.numberOfDice * (Math.ceil(Math.random() * dCharInfo.diceType)) + Math.ceil(Math.random() * 10) + 5)
 
     // display attack damage on screen
     battleDispEl.textContent = ""
@@ -159,7 +156,7 @@ function dSpellAttack() {
     if (pokeInfo.pokeHp > 0) {
         nextPokeRound();
     } else {
-        setTimeout(endBattle, 2000)
+        endBattle();
     }
 }
 

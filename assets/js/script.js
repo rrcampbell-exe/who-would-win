@@ -77,7 +77,7 @@ function dClass() {
 
 // establish d&d image
 function characterImage() {
-    let dCombatantEl = document.querySelector("#d-combatant")
+    let dCombatantEl = document.querySelector("#d-combatant-img")
     let dCharPng = document.createElement("img")
     dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
     dCharPng.className = "d-fighter-image fighter-image"
@@ -191,7 +191,7 @@ function pokeImage(pokemon) {
     fetch (chosenPokeApi)
         .then(res => res.json())
         .then(data => {
-            let pokeCombatantEl = document.querySelector("#poke-combatant")
+            let pokeCombatantEl = document.querySelector("#poke-combatant-img")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
             pokePng.className = "poke-fighter-image fighter-image"

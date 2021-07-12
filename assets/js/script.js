@@ -25,6 +25,12 @@ var winTracker = {
     dWins: 0,
 }
 
+// capitalize names where necessary
+function capitalize (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 // FUNCTIONS FOR COMBATANT GENERATION
 
 // establish d&d race
@@ -36,8 +42,9 @@ function dRace() {
             let randomIndex = Math.floor(Math.random() * (data.results.length))
             dCharInfo.characterRace = data.results[randomIndex].index
             let dRaceDispEl = document.querySelector("#d-char-race")
+            let raceCaps = capitalize(data.results[randomIndex].index)
             dRaceDispEl.textContent = ""
-            dRaceDispEl.append(dCharInfo.characterRace)
+            dRaceDispEl.append(raceCaps)
             dSpeed(dCharInfo.characterRace);
         })
 };
@@ -71,8 +78,9 @@ function dClass() {
             var randomIndex = Math.floor(Math.random() * (data.results.length))
             var chosenClass = data.results[randomIndex].index
             let dClassDispEl = document.querySelector("#d-char-class")
+            let chosenClassCaps = capitalize(data.results[randomIndex].index)
             dClassDispEl.textContent = ""
-            dClassDispEl.append(chosenClass)
+            dClassDispEl.append(chosenClassCaps)
             dCharInfo.characterClass = chosenClass
             dLevel(dCharInfo.characterClass)
             dAttack(dCharInfo.characterClass)
@@ -176,11 +184,6 @@ function dSpellPower(spellIndex) {
         })
 }
 
-// capitalize name of pokemon once chosen
-function capitalize (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 // establish pokemon from gen 1
 function pokeChoice() {
     var randomPoke = Math.ceil(Math.random() * 151)
@@ -254,7 +257,9 @@ function pokeMoveFetch(pokemon) {
             pokeInfo.pokeAttackName = data.moves[randomIndex].move.name
             let pokeAttackDispEl = document.querySelector("#poke-attack")
             pokeAttackDispEl.textContent = ""
-            pokeAttackDispEl.append(pokeInfo.pokeAttackName)
+            let pokeAttackDisp = pokeInfo.pokeAttackName
+            pokeAttackDisp = pokeAttackDisp.replace(/-/g, " ")
+            pokeAttackDispEl.append(pokeAttackDisp)
             pokeInfo.pokeMoveUrl = data.moves[randomIndex].move.url
             pokeMovePower(pokeInfo.pokeMoveUrl)
         })

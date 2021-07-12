@@ -18,3 +18,7 @@
     flex-direction: column;
     justify-content: flex-end;
 }
+
+#poke-attack, #d-char-attack, #d-char-race {
+    text-transform: capitalize;
+}

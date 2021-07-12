@@ -64,15 +64,16 @@ function nextDndRound() {
 
 // poke attack
 function pokeAttack() {
-    // update button on page
-    nextDndRound();
-    
     // generate strength of pokemon attack
     let pokeAttackDamage = Math.ceil(Math.random() * (pokeInfo.pokeAttackPower - (pokeInfo.pokeAttackPower * 0.65) +1) + (pokeInfo.pokeAttackPower * 0.65))
     
+    // update attack name
+    let pokeAttackDisp = pokeInfo.pokeAttackName
+    pokeAttackDisp = pokeAttackDisp.replace(/-/g, " ")
+    
     // display attack damage on screen
     battleDispEl.textContent = ""
-    battleDispEl.textContent = pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage with " + pokeInfo.pokeAttackName + "!"
+    battleDispEl.textContent = pokeInfo.pokeName + " does " + pokeAttackDamage + " HP of damage with " + pokeAttackDisp + "!"
 
     // update d&d character HP value
     dCharInfo.characterHp = dCharInfo.characterHp - pokeAttackDamage
@@ -108,9 +109,13 @@ function dWeaponAttack() {
     // generate strength of d&d character attack
     let dAttackDamage = ((dCharInfo.numberOfDice * (dCharInfo.characterLevel - 6)) * (Math.ceil(Math.random() * dCharInfo.diceType)))
 
+    // update weapon name
+    let weaponDisp = dCharInfo.characterAttackName
+    weaponDisp = weaponDisp.split(",")[0]
+    
     // display attack damage on screen
     battleDispEl.textContent = ""
-    battleDispEl.textContent = "The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with their " + dCharInfo.characterAttackName + "!"
+    battleDispEl.textContent = "The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with their " + weaponDisp + "!"
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage

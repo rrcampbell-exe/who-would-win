@@ -30,6 +30,11 @@ function capitalize (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// remove hyphens from names where necessary
+function hyphenRemove (string) {
+    string.split("-")[0]
+}
+
 
 // FUNCTIONS FOR COMBATANT GENERATION
 
@@ -195,7 +200,9 @@ function pokeChoice() {
             pokeInfo.pokeName = capitalize(data.name)
             let pokeNameDispEl = document.querySelector("#poke-name")
             pokeNameDispEl.textContent = ""
-            pokeNameDispEl.append(pokeInfo.pokeName)
+            let pokeNameAdj = pokeInfo.pokeName
+            pokeNameAdj = pokeNameAdj.split("-")[0]
+            pokeNameDispEl.append(pokeNameAdj)
             pokeHpFetch(pokeDataPass)
             pokeSpeedFetch(pokeDataPass)
             pokeMoveFetch(pokeDataPass)
@@ -249,7 +256,7 @@ function pokeMoveFetch(pokemon) {
         .then(res => res.json())
         .then(data => {
             if (pokemon == "ditto") {
-                $(".poke-combatant-img").remove()
+                $("#poke-combatant-img").remove()
                 pokeChoice()
                 return
             }

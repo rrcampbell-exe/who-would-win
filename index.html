@@ -5,23 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Would Win?</title>
-    <link rel='stylesheet' href='./assets/css/style.css'>
+    <link rel='stylesheet' type='text/css' href='./assets/css/style.css'>
     <!-- link to third-party stylesheet goes here (materialize, etc.) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
-<body>
-    <div id="button-holder">
-        
-    </div>
+<body style="background-image: url('./assets/images/battle-ring.jpg');background-size: cover;background-attachment: fixed;background-position: 100%;">
+    <header>
+        <div class="game-title-wrapper">
+            <h1>WhO wOuLd WiN?</h1>
+        </div>
+    </header>
 
-    <main>
-        <section>
-            <div id="pokemon-win"></div>
-        </section>
-
-        <section>
-            <div id="dnd-win"></div>
-        </section>
+    <main class="main-container">
+        <div class="button-holder" id="button-holder"></div>
     </main>
+
+    <footer id="winner">
+
+    </footer>
 
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>

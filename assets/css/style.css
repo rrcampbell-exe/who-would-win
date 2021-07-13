@@ -1,9 +1,86 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --main-color: #eaeaea;
+    --secondary-color: #fff;
 }
 
-.fighter-image {
-    width: 20%;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--main-color);
+}
+
+header,
+footer {
+    background: var(--secondary-color);
+    padding: 20px 18px;
+    border-bottom: 5px solid var(--primary);
+    box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+    color: var(--main-text);
+    font-family: 'Russo One', sans-serif;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.game-title-wrapper {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 7em;
+}
+
+#button-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        'fighter-image-left fighter-image-right'
+        'button-holder button-holder'
+    ;
+    min-height: 10em;
+}
+
+.fighter-image-left {
+    grid-area: fighter-image-left;
+    width: 100%;
+    display: grid;
+    align-content: center;
+}
+
+.fighter-image-right {
+    grid-area: fighter-image-right;
+    width: 100%;
+    display: grid;
+    align-content: center;
+}
+
+.fight-btn {
+    display: block;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+    h1 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #button-holder {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'fighter-image-left'
+            'fighter-image-right'
+            'button-holder'
+        ;
+    }
 }

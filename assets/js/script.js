@@ -80,7 +80,7 @@ function characterImage() {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dCharPng = document.createElement("img")
     dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
-    dCharPng.className = "fighter-image"
+    dCharPng.className = "fighter-image-right"
     buttonHolderEl.append(dCharPng)
 }
 
@@ -193,7 +193,7 @@ function pokeImage(pokemon) {
             let buttonHolderEl = document.querySelector("#button-holder")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
-            pokePng.className = "fighter-image"
+            pokePng.className = "fighter-image-left"
             pokePng.src = pokeImageUrl
             buttonHolderEl.append(pokePng)
         }) 
@@ -250,6 +250,8 @@ function pokeMovePower(moveUrl) {
             console.log(pokeInfo.pokeAttackName, pokeInfo.pokeAttackPower)
         })
 }
+
+
 
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD

@@ -20,6 +20,17 @@ function fightButton () {
     dButton.addEventListener("click", firstMove)
 }
 
+// function that takes in winner info and displays it on the page
+function winner(winnerInfo) {
+    let winnerHolderEl = document.querySelector('#winner')
+    let announcerHeading = document.createElement("h1")
+    let tracker = JSON.parse(localStorage.getItem('winTracker'))
+    announcerHeading.textContent = winnerInfo + "\nPokemon: " + tracker.pokeWins + " Dungeons & Dragons: " + tracker.dWins
+    announcerHeading.setAttribute("id", "winnerH1")
+    winnerHolderEl.append(announcerHeading);
+    endBattle()
+}
+
 // fight button
 setTimeout(fightButton, 1500)
 
@@ -39,10 +50,10 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         dAttackMove();
     } else {
-        // pokeInfo.winner = pokeInfo.pokeName
         // pokeInfo.loser = dCharInfo
         // handleBattleEnding(pokeInfo)
-        endBattle()
+        winner(pokeInfo.pokeName)
+        // endBattle()
     }
 }
 
@@ -73,9 +84,9 @@ function dWeaponAttack() {
     } else {
         //battle += 1;
         // dCharInfo.loser = pokeInfo
-        // dCharInfo.winner = dCharInfo.characterClass
+        winner(dCharInfo.characterClass)
         // handleBattleEnding(dCharInfo)
-        endBattle()
+        // endBattle()
     }
 }
 
@@ -96,9 +107,9 @@ function dSpellAttack() {
     } else {
         //battle += 1;
         // dCharInfo.loser = pokeInfo
-        // dCharInfo.winner = dCharInfo.characterClass
         // handleBattleEnding(dCharInfo)
-        endBattle()
+        winner(dCharInfo.characterClass)
+        // endBattle()
     }
 }
 
@@ -110,14 +121,18 @@ function handleBattleEnding(victorsData) {
     } else {
         setBattleStorage(victorsData)
     }
-    endBattle()
+    //endBattle()
 }
 
 function setBattleStorage(dataAboutVictor) {
-        let oldBattles = getBattleStorage() // [{}, {}, ...]
+        let oldBattles = getOldBattleStorage() // [{}, {}, ...]
         oldBattles.push(dataAboutVictor) //old battles plus the latest
         // this overwrites everything there
         return localStorage.setItem('battles', JSON.stringify(oldBattles))
+}
+
+function getOldBattleStorage() {
+    return JSON.parse(localStorage.getItem('battles'))
 }
 
 function getBattleStorage() {
@@ -135,6 +150,7 @@ function endBattle(){
 
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
+        // winner(pokeInfo.pokeName)
         window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
 
         // add win to pokemon team, all-time
@@ -152,6 +168,7 @@ function endBattle(){
 
     } else {
         // declare d&d character the winner
+        // winner(dCharInfo.characterClass)
         window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
 
         // add win to d&d team, all-time
@@ -176,7 +193,8 @@ function playAgainConfirm() {
     let playAgainConfirm = window.confirm("Would you like to play again?")
 
     if (playAgainConfirm) {
-        $(".fighter-image").remove();
+        $(".fighter-image-left").remove();
+        $(".fighter-image-right").remove();
 
         // d&d character functions
         dRace();

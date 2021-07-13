@@ -57,6 +57,11 @@ function fightButton () {
     dButton.textContent = "Start!"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
+
+    if ($(window).width() < 769) {
+        $(".fight-btn").removeClass("btn-large")
+        $(".fight-btn").addClass("btn-small")
+    }
     dButton.addEventListener("click", firstMove)
 }
 

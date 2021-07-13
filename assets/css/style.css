@@ -32,6 +32,10 @@ h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
 }
 
+.combat-container {
+    display: none;
+}
+
 .combatant-data, #battle-narration, .scoreboard {
     background: var(--secondary-color);
     padding: 10px 9px;

@@ -332,8 +332,7 @@ function pokeMovePower(moveUrl) {
 // INITIAL DISPLAY FUNCTION
 function combatContainerDisp() {
       $(document).ready(function() {
-        $(".combat-container").hide()
-        $(".combat-container").show(2000)
+          $(".combat-container").fadeIn(2500);
     })
 }
 
@@ -344,7 +343,7 @@ combatContainerDisp();
 // d&d character functions
 dRace();
 dClass();
-setTimeout(characterImage, 1000);
+setTimeout(characterImage, 100);
 console.log(dCharInfo);
 
 // pokemon functions

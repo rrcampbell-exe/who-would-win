@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6, strong {
 #button-holder {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 #poke-attack, #d-char-attack, #d-char-race {

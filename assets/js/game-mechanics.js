@@ -17,19 +17,18 @@ function fetchScoreboard() {
 // explode, then restore combat area
 function combatContainerOffOn() {
     $(".combat-container").effect("puff")
-    $(".combat-container").show(2000)
+    $(".combat-container").fadeIn(2500);
 }
 
 // make battle-narration box visible
 function seeBattleBox() {
-    let battleNarrationEl = document.querySelector("#battle-narration")
-    battleNarrationEl.style.visibility = "visible"
+    $("#battle-narration").fadeIn(500);
 }
 
 // hide battle-narration box
 function hideBattleBox() {
-    let battleNarrationEl = document.querySelector("#battle-narration")
-    battleNarrationEl.style.visibility = "hidden"
+    $("#battle-narration").fadeOut(200);
+
 }
 
 // FUNCTIONS FOR GAMEPLAY
@@ -196,8 +195,6 @@ function getBattleStorage() {
 function endBattle(){
     // pull/store the winTracker variable
     if (localStorage.getItem('winTracker') == null) {
-        // let scoreBoardEl = document.querySelector(".scoreboard")
-        // scoreBoardEl.style.display = "none"
         localStorage.setItem('winTracker', JSON.stringify(winTracker))
     } else {
         winTracker = getBattleStorage()
@@ -230,15 +227,13 @@ function endBattle(){
 
     }
 
-    let scoreBoardEl = document.querySelector(".scoreboard")
-    scoreBoardEl.style.display = "flex"
-
     playAgainConfirm()
 }
 
 // ask player if they would like to play again
 function playAgainConfirm() {
-    hideBattleBox()
+
+    
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
@@ -249,6 +244,11 @@ function playAgainConfirm() {
 }
 
 function playAgain() {
+    hideBattleBox()
+    let scoreBoardEl = document.querySelector(".scoreboard")
+    $(".scoreboard").fadeIn(1000);
+    scoreBoardEl.style.display = "flex"
+    
     combatContainerOffOn();
     
     // d&d character functions
@@ -259,7 +259,7 @@ function playAgain() {
 
     // pokemon functions
     setTimeout(pokeChoice, 300)
-    setTimeout(pokeImage, 1500);
+    setTimeout(pokeImage, 1000);
     console.log(pokeInfo);
 
     battleDispEl.textContent = ""

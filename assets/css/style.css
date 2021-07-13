@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .combatant-data {
-    font-size: 1.9vw;
+    font-size: 1.5vw;
     text-align: center;
 }
 
@@ -70,7 +70,8 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 #battle-narration {
-    visibility: hidden;
+    display: none;
+    font-size: 2vw;
 }
 
 #d-combatant-img, #poke-combatant-img {

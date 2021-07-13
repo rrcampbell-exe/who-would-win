@@ -59,7 +59,8 @@ h1, h2, h3, h4, h5, h6, strong {
     display: flex;
     padding: 15px;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    min-width: 130px;
 }
 
 #poke-attack, #d-char-attack, #d-char-race {

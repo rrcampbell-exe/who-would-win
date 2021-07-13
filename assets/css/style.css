@@ -76,17 +76,6 @@ h1 {
     min-height: 7em;
 }
 
-/* .parallax {
-  background-image: "./assets/images/battle-ring.jpg";
-  height: 100%;
-
-    /* Create the parallax scrolling effect 
-  background-attachment: scroll;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
 /* .fighter-image-left {
     grid-area: fighter-image-left;
     width: 100%;

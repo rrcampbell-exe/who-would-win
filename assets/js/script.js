@@ -342,20 +342,19 @@ setTimeout(pokeImage, 1500);
 console.log(pokeInfo);
 
 // parallax function
-(function(){
+let parallax = function() {
 
     var parallax = document.querySelectorAll("body"),
         speed = 0.15;
-  
-    window.onscroll = function(){
-      [].slice.call(parallax).forEach(function(el,i){
+        window.onscroll = function(){
+          [].slice.call(parallax).forEach(function(el,i){
   
         var windowYOffset = window.pageYOffset,
             elBackgrounPos = "15% " + (windowYOffset * speed) + "px";
+            el.style.backgroundPosition = elBackgrounPos;
   
-        el.style.backgroundPosition = elBackgrounPos;
+          });
+        };
   
-      });
-    };
-  
-  })();
+};
+parallax();

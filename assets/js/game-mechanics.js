@@ -57,7 +57,6 @@ function fightButton () {
     dButton.textContent = "Start!"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
-
     if ($(window).width() < 769) {
         $(".fight-btn").removeClass("btn-large")
         $(".fight-btn").addClass("btn-small")
@@ -76,6 +75,10 @@ function nextPokeRound() {
     dButton.textContent = "Attack!"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
+    if ($(window).width() < 769) {
+        $(".fight-btn").removeClass("btn-large")
+        $(".fight-btn").addClass("btn-small")
+    }
     dButton.addEventListener("click", pokeAttack)
 }
 
@@ -87,6 +90,10 @@ function nextDndRound() {
     dButton.textContent = "Fight!"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
+    if ($(window).width() < 769) {
+        $(".fight-btn").removeClass("btn-large")
+        $(".fight-btn").addClass("btn-small")
+    }
     dButton.addEventListener("click", dAttackMove)
 }
 
@@ -250,6 +257,12 @@ function playAgainConfirm() {
     dButton.textContent = "Again?"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
+
+    if ($(window).width() < 769) {
+        $(".fight-btn").removeClass("btn-large")
+        $(".fight-btn").addClass("btn-small")
+    }
+    
     dButton.addEventListener("click", playAgain)
 }
 

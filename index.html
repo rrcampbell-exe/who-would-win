@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 
 </head>
@@ -22,42 +20,40 @@
             <h1>WhO wOuLd WiN?</h1>
         </div>
     </header>
-    <div class="scoreboard col s12">
-        <section>
-            <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
-        </section>
-
-        <section>
-            <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
-        </section>
-    </div>
-    <div class="combatant-container">
-        <div class="row">
-            <div id="d-combatant col s5">
-                <span id="d-combatant-img"></span>
+    <div class="row">
+        <div class="col s12 scoreboard">
+            <section>
+                <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
+            </section>
+    
+            <section>
+                <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
+            </section>
+        </div>
+        <div class="col s5 d-combatant">
+            <span id="d-combatant-img"></span>
+            <div class="combatant-data">
                 <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
                 <p>HP: <span id="d-char-hp"></span></p>
                 <p><span id="d-char-attack"></span></p>
             </div>
-            <div id="button-holder col s2"></div>
-            <div id="poke-combatant col s5">
-                <span id="poke-combatant-img"></span>
+        </div>
+        <div class="col s2" id="button-holder"></div>
+        <div class="col s5 poke-combatant">
+            <span id="poke-combatant-img"></span>
+            <div class="combatant-data">
                 <p><span id="poke-name"></span>
                 <p>HP: <span id="poke-hp"></span></p>
                 <p>Attack: <span id="poke-attack"></span></p>
-            </div> 
-        </div>   
-    </div>
-    <div id="battle-narration">
-        
-    </div>
+            </div>
+        </div>
+      </div>
+      <div id="battle-narration"></div>
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
     <script src='./assets/js/script.js'></script>
     <script src='./assets/js/game-mechanics.js'></script>
 </body>
-<!-- <footer id="winner">
 
-</footer> -->
 </html>

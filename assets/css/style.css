@@ -9,13 +9,14 @@
 
 body {
     background-color: var(--main-color);
+    font-family: 'Russo One', sans-serif;
 }
 
 header,
 footer {
     background: var(--secondary-color);
     padding: 20px 18px;
-    border-bottom: 5px solid var(--primary);
+    border-bottom: 5px solid var(--main-color);
     box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
 }
 
@@ -30,9 +31,18 @@ h1, h2, h3, h4, h5, h6, strong {
     flex-wrap: wrap;
 }
 
-.combatant-container {
+/* .combatant-container {
     display: flex;
     flex-wrap: wrap;
+} */
+
+.combatant-data, #battle-narration, .scoreboard {
+    background: var(--secondary-color);
+    padding: 10px 9px;
+    border: 5px solid var(--main-color);
+    box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    font-size: 2vw;
 }
 
 .fighter-image {

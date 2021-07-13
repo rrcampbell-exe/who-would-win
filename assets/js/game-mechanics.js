@@ -5,19 +5,42 @@ var dHpDisp = document.querySelector("#d-char-hp")
 var pokeScore = document.querySelector("#poke-win")
 var dndScore = document.querySelector("#dnd-win")
 
-// FUNCTIONS FOR SCOREBOARD DISPLAY
+// FUNCTIONS FOR DISPLAY
 
 // load all-time scoreboard on page load
 function fetchScoreboard() {
     let winTracker = getBattleStorage()
+    if(winTracker){
+        $('.scoreboard').fadeIn(1000);
+        let scoreBoardEl = document.querySelector(".scoreboard")
+        scoreBoardEl.style.display = "flex"
+    }
     pokeScore.textContent = winTracker.pokeWins
     dndScore.textContent = winTracker.dWins
+}
+
+// explode, then restore combat area
+function combatContainerOffOn() {
+    $(".combat-container").effect("puff")
+    $(".combat-container").fadeIn(2500);
+}
+
+// make battle-narration box visible
+function seeBattleBox() {
+    $("#battle-narration").fadeIn(500);
+}
+
+// hide battle-narration box
+function hideBattleBox() {
+    $("#battle-narration").fadeOut(200);
+
 }
 
 // FUNCTIONS FOR GAMEPLAY
 
 // designate first move
 function firstMove() {
+    seeBattleBox()
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
         console.log(pokeInfo.pokeName + " attacks first!")
         pokeAttack();
@@ -31,22 +54,22 @@ function firstMove() {
 function fightButton () {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Fight!"
-    dButton.setAttribute("class", "fight-btn btn-floating btn-large pulse")
+    dButton.textContent = "Start!"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", firstMove)
 }
 
 // add fight button to page on timer
-setTimeout(fightButton, 2000)
+fightButton()
 
 // create next pokemon battle round button
 function nextPokeRound() {
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Attack, " + pokeInfo.pokeName + "!"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Attack!"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", pokeAttack)
 }
@@ -56,8 +79,8 @@ function nextDndRound() {
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Get 'em, " + dCharInfo.characterClass + "!"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Fight!"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", dAttackMove)
 }
@@ -214,33 +237,41 @@ function endBattle(){
 
 // ask player if they would like to play again
 function playAgainConfirm() {
+
+    
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Play again?"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Again?"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", playAgain)
 }
 
 function playAgain() {
+    hideBattleBox()
+    let scoreBoardEl = document.querySelector(".scoreboard")
+    $(".scoreboard").fadeIn(1000);
+    scoreBoardEl.style.display = "flex"
+    
+    combatContainerOffOn();
+    
+    // d&d character functions
+    setTimeout(dRace, 300)
+    setTimeout(dClass, 300)
+    setTimeout(characterImage, 1000);
+    console.log(dCharInfo);
+
+    // pokemon functions
+    setTimeout(pokeChoice, 300)
+    console.log(pokeInfo);
+
     battleDispEl.textContent = ""
     $(".d-fighter-image").remove();
     $(".poke-fighter-image").remove();
     $(".fight-btn").remove();
 
-    fightButton();
-    
-    // d&d character functions
-    dRace();
-    dClass();
-    setTimeout(characterImage, 1500);
-    console.log(dCharInfo);
-
-    // pokemon functions
-    pokeChoice();
-    setTimeout(pokeImage, 1500);
-    console.log(pokeInfo);
+    setTimeout(fightButton, 300)
 }
 
 // RUN ON PAGE LOAD

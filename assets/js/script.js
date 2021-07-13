@@ -199,7 +199,7 @@ function dSpellPower(spellIndex) {
             }
             // establish spell power, split result into diceType (eg. d6, d12, etc.) and numberOfDice
             let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
-            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys.length)]];
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys(spellDamage).length)]];
             dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0]) 
             dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
         })
@@ -329,15 +329,41 @@ function pokeMovePower(moveUrl) {
         })
 }
 
+// INITIAL DISPLAY FUNCTION
+function combatContainerDisp() {
+      $(document).ready(function() {
+          $(".combat-container").fadeIn(2000);
+    })
+}
+
 // RUNNING OF FUNCTIONS ON PAGE LOAD
+
+setTimeout(combatContainerDisp, 500)
+
 // d&d character functions
 dRace();
 dClass();
-setTimeout(characterImage, 1500);
+setTimeout(characterImage, 300);
 console.log(dCharInfo);
 
 // pokemon functions
 pokeChoice();
-setTimeout(pokeImage, 1500);
 console.log(pokeInfo);
 
+// parallax function
+let parallax = function() {
+
+    var parallax = document.querySelectorAll("body"),
+        speed = 0.15;
+        window.onscroll = function(){
+          [].slice.call(parallax).forEach(function(el,i){
+  
+        var windowYOffset = window.pageYOffset,
+            elBackgrounPos = "15% " + (windowYOffset * speed) + "px";
+            el.style.backgroundPosition = elBackgrounPos;
+  
+          });
+        };
+  
+};
+parallax();

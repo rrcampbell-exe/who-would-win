@@ -5,37 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Would Win?</title>
-    <link rel='stylesheet' type='text/css' href='./assets/css/style.css'>
-    <!-- link to third-party stylesheet goes here (materialize, etc.) -->
-<<<<<<< HEAD
+    <link rel='stylesheet' href='./assets/css/style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 
 </head>
 <body style="background-image: url('./assets/images/battle-ring.jpg');background-size: cover;background-attachment: fixed;background-position: 100%;">
+<body>
     <header>
         <div class="game-title-wrapper">
             <h1>WhO wOuLd WiN?</h1>
         </div>
     </header>
-
-    <main class="main-container">
-        <div class="button-holder" id="button-holder"></div>
-    </main>
-
-    <footer id="winner">
-
-    </footer>
-
-=======
-</head>
-<body>
-    <div class="scoreboard">
+    <div class="scoreboard col s12">
         <section>
             <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
         </section>
@@ -44,29 +31,33 @@
             <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
         </section>
     </div>
-    <main class="combatant-container">
-        <div id="d-combatant">
-            <span id="d-combatant-img"></span>
-            <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
-            <p>HP: <span id="d-char-hp"></span></p>
-            <p><span id="d-char-attack"></span></p>
-        </div>
-        <div id="button-holder"></div>
-        <div id="poke-combatant">
-            <span id="poke-combatant-img"></span>
-            <p><span id="poke-name"></span>
-            <p>HP: <span id="poke-hp"></span></p>
-            <p>Attack: <span id="poke-attack"></span></p>
-        </div>    
-    </main>
+    <div class="combatant-container">
+        <div class="row">
+            <div id="d-combatant col s5">
+                <span id="d-combatant-img"></span>
+                <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
+                <p>HP: <span id="d-char-hp"></span></p>
+                <p><span id="d-char-attack"></span></p>
+            </div>
+            <div id="button-holder col s2"></div>
+            <div id="poke-combatant col s5">
+                <span id="poke-combatant-img"></span>
+                <p><span id="poke-name"></span>
+                <p>HP: <span id="poke-hp"></span></p>
+                <p>Attack: <span id="poke-attack"></span></p>
+            </div> 
+        </div>   
+    </div>
     <div id="battle-narration">
         
     </div>
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
     <script src='./assets/js/script.js'></script>
     <script src='./assets/js/game-mechanics.js'></script>
 </body>
+<!-- <footer id="winner">
+
+</footer> -->
 </html>

@@ -31,27 +31,12 @@ function firstMove() {
 function fightButton () {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Let's fight!"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Fight!"
+    dButton.setAttribute("class", "fight-btn btn-floating btn-large pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", firstMove)
 }
 
-<<<<<<< HEAD
-// function that takes in winner info and displays it on the page
-function winner(winnerInfo) {
-    let winnerHolderEl = document.querySelector('#winner')
-    let announcerHeading = document.createElement("h1")
-    let tracker = JSON.parse(localStorage.getItem('winTracker'))
-    announcerHeading.textContent = winnerInfo + "\nPokemon: " + tracker.pokeWins + " Dungeons & Dragons: " + tracker.dWins
-    announcerHeading.setAttribute("id", "winnerH1")
-    winnerHolderEl.append(announcerHeading);
-    endBattle()
-}
-
-// fight button
-setTimeout(fightButton, 1500)
-=======
 // add fight button to page on timer
 setTimeout(fightButton, 2000)
 
@@ -76,7 +61,6 @@ function nextDndRound() {
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", dAttackMove)
 }
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 
 // poke attack
 function pokeAttack() {
@@ -106,15 +90,8 @@ function pokeAttack() {
     if (dCharInfo.characterHp > 0) {
         nextDndRound();
     } else {
-<<<<<<< HEAD
-        // pokeInfo.loser = dCharInfo
-        // handleBattleEnding(pokeInfo)
-        winner(pokeInfo.pokeName)
-        // endBattle()
-=======
         dCharInfo.characterHp = 0
         endBattle();
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
     }
 }
 
@@ -153,16 +130,8 @@ function dWeaponAttack() {
     if (pokeInfo.pokeHp > 0) {
         nextPokeRound();
     } else {
-<<<<<<< HEAD
-        //battle += 1;
-        // dCharInfo.loser = pokeInfo
-        winner(dCharInfo.characterClass)
-        // handleBattleEnding(dCharInfo)
-        // endBattle()
-=======
         pokeInfo.pokeHp = 0
         endBattle();
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
     }
 }
 
@@ -184,15 +153,7 @@ function dSpellAttack() {
     if (pokeInfo.pokeHp > 0) {
         pokeHpDisp.textContent = pokeInfo.pokeHp
     } else {
-<<<<<<< HEAD
-        //battle += 1;
-        // dCharInfo.loser = pokeInfo
-        // handleBattleEnding(dCharInfo)
-        winner(dCharInfo.characterClass)
-        // endBattle()
-=======
         pokeHpDisp.textContent = 0
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
     }
     console.log(pokeInfo.pokeName + " now has " + pokeInfo.pokeHp + " HP remaining!")
 
@@ -202,17 +163,6 @@ function dSpellAttack() {
     } else {
         endBattle();
     }
-<<<<<<< HEAD
-    //endBattle()
-}
-
-function setBattleStorage(dataAboutVictor) {
-        let oldBattles = getOldBattleStorage() // [{}, {}, ...]
-        oldBattles.push(dataAboutVictor) //old battles plus the latest
-        // this overwrites everything there
-        return localStorage.setItem('battles', JSON.stringify(oldBattles))
-=======
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 }
 
 function getOldBattleStorage() {
@@ -234,13 +184,8 @@ function endBattle(){
 
     if (pokeInfo.pokeHp > dCharInfo.characterHp) {
         // declare pokemon the winner
-<<<<<<< HEAD
-        // winner(pokeInfo.pokeName)
-        window.alert(pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!");
-=======
         battleDispEl.textContent = ""
         battleDispEl.textContent = pokeInfo.pokeName + " has won the battle with the " + dCharInfo.characterRace + "!"
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 
         // add win to pokemon team, all-time
         winTracker.pokeWins = winTracker.pokeWins + 1
@@ -252,13 +197,8 @@ function endBattle(){
 
     } else {
         // declare d&d character the winner
-<<<<<<< HEAD
-        // winner(dCharInfo.characterClass)
-        window.alert("The " + dCharInfo.characterRace + " has won the battle with " + pokeInfo.pokeName + "!")
-=======
         battleDispEl.textContent = ""
         battleDispEl.textContent = "The " + dCharInfo.characterRace + " " + dCharInfo.characterClass + " has won the battle with " + pokeInfo.pokeName + "!"
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 
         // add win to d&d team, all-time
         winTracker.dWins = winTracker.dWins + 1
@@ -274,13 +214,6 @@ function endBattle(){
 
 // ask player if they would like to play again
 function playAgainConfirm() {
-<<<<<<< HEAD
-    let playAgainConfirm = window.confirm("Would you like to play again?")
-
-    if (playAgainConfirm) {
-        $(".fighter-image-left").remove();
-        $(".fighter-image-right").remove();
-=======
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
@@ -289,7 +222,6 @@ function playAgainConfirm() {
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", playAgain)
 }
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 
 function playAgain() {
     battleDispEl.textContent = ""

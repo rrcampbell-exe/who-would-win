@@ -7,7 +7,6 @@
     box-sizing: border-box;
 }
 
-<<<<<<< HEAD
 body {
     background-color: var(--main-color);
 }
@@ -24,8 +23,9 @@ h1, h2, h3, h4, h5, h6, strong {
     color: var(--main-text);
     font-family: 'Russo One', sans-serif;
     font-weight: 500;
-=======
-.scoreboard {
+}
+
+    .scoreboard {
     display: flex;
     flex-wrap: wrap;
 }
@@ -36,7 +36,7 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .fighter-image {
-    min-width: 240px;
+    width: 100%;
 }
 
 #button-holder {
@@ -47,7 +47,6 @@ h1, h2, h3, h4, h5, h6, strong {
 
 #poke-attack, #d-char-attack, #d-char-race {
     text-transform: capitalize;
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 }
 
 h1 {
@@ -61,37 +60,13 @@ h1 {
     min-height: 7em;
 }
 
-#button-holder {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-        'fighter-image-left fighter-image-right'
-        'button-holder button-holder'
-    ;
-    min-height: 10em;
-}
-
-.fighter-image-left {
+/* .fighter-image-left {
     grid-area: fighter-image-left;
     width: 100%;
     display: grid;
     align-content: center;
 }
 
-.fighter-image-right {
-    grid-area: fighter-image-right;
-    width: 100%;
-    display: grid;
-    align-content: center;
-}
-
-.fight-btn {
-    display: block;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-}
 
 @media screen and (max-width: 1200px) {
     h1 {
@@ -108,4 +83,4 @@ h1 {
             'button-holder'
         ;
     }
-}
+} */

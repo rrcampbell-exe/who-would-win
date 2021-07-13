@@ -103,13 +103,8 @@ function characterImage() {
     let dCombatantEl = document.querySelector("#d-combatant-img")
     let dCharPng = document.createElement("img")
     dCharPng.src = "./assets/images/" + dCharInfo.characterRace + "-" + dCharInfo.characterClass + ".png"
-<<<<<<< HEAD
-    dCharPng.className = "fighter-image-right"
-    buttonHolderEl.append(dCharPng)
-=======
     dCharPng.className = "d-fighter-image fighter-image"
     dCombatantEl.append(dCharPng)
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 }
 
 // establish d&d level
@@ -256,13 +251,9 @@ function pokeImage(pokemon) {
             let pokeCombatantEl = document.querySelector("#poke-combatant-img")
             let pokeImageUrl = data.sprites.front_default
             let pokePng = document.createElement("img")
-<<<<<<< HEAD
-            pokePng.className = "fighter-image-left"
-=======
 
             // assign classes and src to pokemon image
             pokePng.className = "poke-fighter-image fighter-image"
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
             pokePng.src = pokeImageUrl
             pokeCombatantEl.append(pokePng)
         }) 
@@ -338,12 +329,6 @@ function pokeMovePower(moveUrl) {
         })
 }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> b1c1620074d2f9595227167e035f6bb947f8f29f
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 // d&d character functions
 dRace();

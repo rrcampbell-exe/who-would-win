@@ -1,6 +1,6 @@
 :root {
     --main-color: #eaeaea;
-    --secondary-color: #fff;
+    --secondary-color: rgba(0, 0, 0, 0.75);
 }
 
 * {
@@ -8,27 +8,29 @@
 }
 
 body {
+    color: #fff;
     background-color: var(--main-color);
     font-family: 'Russo One', sans-serif;
 }
 
 header,
 footer {
-    background: var(--secondary-color);
+    background: rgba(0, 0, 0, 0.05);
     padding: 20px 18px;
     border-bottom: 5px solid var(--main-color);
     box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
 }
 
 h1, h2, h3, h4, h5, h6, strong {
-    color: var(--main-text);
+    color: var(--main-color);
     font-family: 'Russo One', sans-serif;
     font-weight: 500;
 }
 
-    .scoreboard {
+.scoreboard {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 /* .combatant-container {
@@ -51,8 +53,7 @@ h1, h2, h3, h4, h5, h6, strong {
 
 #button-holder {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 #poke-attack, #d-char-attack, #d-char-race {
@@ -68,6 +69,11 @@ h1 {
     justify-content: center;
     align-content: center;
     min-height: 7em;
+}
+
+#battle-narration {
+    display: flex;
+    justify-content: center;
 }
 
 /* .fighter-image-left {

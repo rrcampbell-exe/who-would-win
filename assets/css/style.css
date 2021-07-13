@@ -10,6 +10,12 @@
 body {
     background-color: var(--main-color);
     font-family: 'Russo One', sans-serif;
+
+    background-image: url("../images/battle-ring.jpg");
+    background-image: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 100%;
 }
 
 header,
@@ -69,6 +75,17 @@ h1 {
     align-content: center;
     min-height: 7em;
 }
+
+/* .parallax {
+  background-image: "./assets/images/battle-ring.jpg";
+  height: 100%;
+
+    /* Create the parallax scrolling effect 
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 
 /* .fighter-image-left {
     grid-area: fighter-image-left;

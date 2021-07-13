@@ -5,7 +5,7 @@ var dHpDisp = document.querySelector("#d-char-hp")
 var pokeScore = document.querySelector("#poke-win")
 var dndScore = document.querySelector("#dnd-win")
 
-// FUNCTIONS FOR SCOREBOARD DISPLAY
+// FUNCTIONS FOR DISPLAY
 
 // load all-time scoreboard on page load
 function fetchScoreboard() {
@@ -14,10 +14,29 @@ function fetchScoreboard() {
     dndScore.textContent = winTracker.dWins
 }
 
+// explode, then restore combat area
+function combatContainerOffOn() {
+    $(".combat-container").effect("puff")
+    $(".combat-container").show(2000)
+}
+
+// make battle-narration box visible
+function seeBattleBox() {
+    let battleNarrationEl = document.querySelector("#battle-narration")
+    battleNarrationEl.style.visibility = "visible"
+}
+
+// hide battle-narration box
+function hideBattleBox() {
+    let battleNarrationEl = document.querySelector("#battle-narration")
+    battleNarrationEl.style.visibility = "hidden"
+}
+
 // FUNCTIONS FOR GAMEPLAY
 
 // designate first move
 function firstMove() {
+    seeBattleBox()
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
         console.log(pokeInfo.pokeName + " attacks first!")
         pokeAttack();
@@ -31,22 +50,22 @@ function firstMove() {
 function fightButton () {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Fight!"
+    dButton.textContent = "Start!"
     dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", firstMove)
 }
 
 // add fight button to page on timer
-setTimeout(fightButton, 2000)
+fightButton()
 
 // create next pokemon battle round button
 function nextPokeRound() {
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Attack, " + pokeInfo.pokeName + "!"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Attack!"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", pokeAttack)
 }
@@ -56,8 +75,8 @@ function nextDndRound() {
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Get 'em, " + dCharInfo.characterClass + "!"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Fight!"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", dAttackMove)
 }
@@ -177,6 +196,8 @@ function getBattleStorage() {
 function endBattle(){
     // pull/store the winTracker variable
     if (localStorage.getItem('winTracker') == null) {
+        // let scoreBoardEl = document.querySelector(".scoreboard")
+        // scoreBoardEl.style.display = "none"
         localStorage.setItem('winTracker', JSON.stringify(winTracker))
     } else {
         winTracker = getBattleStorage()
@@ -209,38 +230,44 @@ function endBattle(){
 
     }
 
+    let scoreBoardEl = document.querySelector(".scoreboard")
+    scoreBoardEl.style.display = "flex"
+
     playAgainConfirm()
 }
 
 // ask player if they would like to play again
 function playAgainConfirm() {
+    hideBattleBox()
     $(".fight-btn").remove()
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
-    dButton.textContent = "Play again?"
-    dButton.setAttribute("class", "fight-btn")
+    dButton.textContent = "Again?"
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", playAgain)
 }
 
 function playAgain() {
+    combatContainerOffOn();
+    
+    // d&d character functions
+    setTimeout(dRace, 300)
+    setTimeout(dClass, 300)
+    setTimeout(characterImage, 1000);
+    console.log(dCharInfo);
+
+    // pokemon functions
+    setTimeout(pokeChoice, 300)
+    setTimeout(pokeImage, 1500);
+    console.log(pokeInfo);
+
     battleDispEl.textContent = ""
     $(".d-fighter-image").remove();
     $(".poke-fighter-image").remove();
     $(".fight-btn").remove();
 
-    fightButton();
-    
-    // d&d character functions
-    dRace();
-    dClass();
-    setTimeout(characterImage, 1500);
-    console.log(dCharInfo);
-
-    // pokemon functions
-    pokeChoice();
-    setTimeout(pokeImage, 1500);
-    console.log(pokeInfo);
+    setTimeout(fightButton, 300)
 }
 
 // RUN ON PAGE LOAD

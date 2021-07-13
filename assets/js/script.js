@@ -329,16 +329,27 @@ function pokeMovePower(moveUrl) {
         })
 }
 
+// INITIAL DISPLAY FUNCTION
+function combatContainerDisp() {
+      $(document).ready(function() {
+        $(".combat-container").hide()
+        $(".combat-container").show(2000)
+    })
+}
+
 // RUNNING OF FUNCTIONS ON PAGE LOAD
+
+combatContainerDisp();
+
 // d&d character functions
 dRace();
 dClass();
-setTimeout(characterImage, 1500);
+setTimeout(characterImage, 1000);
 console.log(dCharInfo);
 
 // pokemon functions
 pokeChoice();
-setTimeout(pokeImage, 1500);
+setTimeout(pokeImage, 1000);
 console.log(pokeInfo);
 
 // parallax function

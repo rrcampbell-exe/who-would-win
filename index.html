@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 
 </head>
-<body style="background-image: url('./assets/images/battle-ring.jpg');background-size: cover;background-attachment: fixed;background-position: 100%;">
+<body style="background-image: url('./assets/images/jungle.jpg');background-size: cover;background-attachment: fixed;background-position: 100%;">
     <header>
         <div class="game-title-wrapper">
             <h1>WhO wOuLd WiN?</h1>
@@ -31,6 +31,35 @@
 
     </footer>
 
+</head>
+<body>
+    <div class="scoreboard">
+        <section>
+            <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
+        </section>
+
+        <section>
+            <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
+        </section>
+    </div>
+    <main class="combatant-container">
+        <div id="d-combatant">
+            <span id="d-combatant-img"></span>
+            <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
+            <p>HP: <span id="d-char-hp"></span></p>
+            <p><span id="d-char-attack"></span></p>
+        </div>
+        <div id="button-holder"></div>
+        <div id="poke-combatant">
+            <span id="poke-combatant-img"></span>
+            <p><span id="poke-name"></span>
+            <p>HP: <span id="poke-hp"></span></p>
+            <p>Attack: <span id="poke-attack"></span></p>
+        </div>    
+    </main>
+    <div id="battle-narration">
+        
+    </div>
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>

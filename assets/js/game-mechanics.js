@@ -32,7 +32,7 @@ function fightButton () {
     let buttonHolderEl = document.querySelector("#button-holder")
     let dButton = document.createElement("button")
     dButton.textContent = "Fight!"
-    dButton.setAttribute("class", "fight-btn btn-floating btn-large pulse")
+    dButton.setAttribute("class", "fight-btn btn-large red pulse")
     buttonHolderEl.append(dButton);
     dButton.addEventListener("click", firstMove)
 }

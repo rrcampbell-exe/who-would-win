@@ -34,6 +34,8 @@ h1, h2, h3, h4, h5, h6, strong {
 
 .combat-container {
     display: none;
+    margin-left:1%;
+    margin-right:1%;
 }
 
 .combatant-data, #battle-narration, .scoreboard {
@@ -93,6 +95,7 @@ h1, h2, h3, h4, h5, h6, strong {
 #button-holder {
     display: flex;
     justify-content: center;
+    margin-top: 26%;
 }
 
 .fight-btn {

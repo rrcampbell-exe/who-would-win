@@ -10,6 +10,11 @@ var dndScore = document.querySelector("#dnd-win")
 // load all-time scoreboard on page load
 function fetchScoreboard() {
     let winTracker = getBattleStorage()
+    if(winTracker){
+        $('.scoreboard').fadeIn(1000);
+        let scoreBoardEl = document.querySelector(".scoreboard")
+        scoreBoardEl.style.display = "flex"
+    }
     pokeScore.textContent = winTracker.pokeWins
     dndScore.textContent = winTracker.dWins
 }
@@ -259,7 +264,6 @@ function playAgain() {
 
     // pokemon functions
     setTimeout(pokeChoice, 300)
-    setTimeout(pokeImage, 1000);
     console.log(pokeInfo);
 
     battleDispEl.textContent = ""

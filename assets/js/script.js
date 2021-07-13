@@ -199,7 +199,7 @@ function dSpellPower(spellIndex) {
             }
             // establish spell power, split result into diceType (eg. d6, d12, etc.) and numberOfDice
             let spellDamage = data.damage.damage_at_slot_level || data.damage.damage_at_character_level
-            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys.length)]];
+            dCharInfo.characterAttackPower = spellDamage[Object.keys(spellDamage)[Math.floor(Math.random() * Object.keys(spellDamage).length)]];
             dCharInfo.numberOfDice = parseInt(dCharInfo.characterAttackPower.split("d")[0]) 
             dCharInfo.diceType = parseInt(dCharInfo.characterAttackPower.split("d")[1])
         })
@@ -343,12 +343,11 @@ setTimeout(combatContainerDisp, 500)
 // d&d character functions
 dRace();
 dClass();
-setTimeout(characterImage, 150);
+setTimeout(characterImage, 300);
 console.log(dCharInfo);
 
 // pokemon functions
 pokeChoice();
-setTimeout(pokeImage, 1000);
 console.log(pokeInfo);
 
 // parallax function

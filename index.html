@@ -5,18 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Would Win?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href='./assets/css/style.css'>
-    <!-- link to third-party stylesheet goes here (materialize, etc.) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div id="button-holder">
-        
-    </div>
+    <header>
+        <div class="game-title-wrapper">
+            <h1>WhO wOuLd WiN?</h1>
+        </div>
+    </header>
+    <div class="scoreboard">
+        <section>
+            D&D All-Time Wins: <span id="dnd-win">0</span>
+        </section>
 
+        <section>
+            Pokémon All-Time Wins: <span id="poke-win">0</span>
+        </section>
+    </div>
+    <div class="row combat-container">
+        <div class="col s5 d-combatant">
+            <span id="d-combatant-img"></span>
+            <div class="combatant-data">
+                <span id="d-char-race"></span> <span id="d-char-class"></span>
+                <div class="combatant-text-wrap">
+                    <span>HP: <span id="d-char-hp"></span></span>
+                    <span><span id="d-char-attack"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="col s2" id="button-holder">
+        </div>
+        <div class="col s5 poke-combatant">
+            <span id="poke-combatant-img"></span>
+            <div class="combatant-data">
+                <span id="poke-name"></span>
+                <div class="combatant-text-wrap">
+                    <span>HP: <span id="poke-hp"></span></span>
+                    <span>Attack: <span id="poke-attack"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="battle-narration"></div>
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
     <script src='./assets/js/script.js'></script>
     <script src='./assets/js/game-mechanics.js'></script>
 </body>
+
 </html>

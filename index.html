@@ -7,16 +7,56 @@
     <title>Who Would Win?</title>
     <link rel='stylesheet' href='./assets/css/style.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-</head>
-<body>
-    <div id="button-holder">
-        
-    </div>
+<<<<<<< HEAD
+=======
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 
+>>>>>>> 933bfcc2d2b74f8dd6b92f7e97ddde98eaa3d1a4
+</head>
+<body style="background-image: url('./assets/images/battle-ring.jpg');background-size: cover;background-attachment: fixed;background-position: 100%;">
+<body>
+    <header>
+        <div class="game-title-wrapper">
+            <h1>WhO wOuLd WiN?</h1>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col s12 scoreboard">
+            <section>
+                <p>D&D All-Time Wins: <span id="dnd-win">0</span></p>
+            </section>
+    
+            <section>
+                <p>Pokémon All-Time Wins: <span id="poke-win">0</span></p>
+            </section>
+        </div>
+        <div class="col s5 d-combatant">
+            <span id="d-combatant-img"></span>
+            <div class="combatant-data">
+                <p><span id="d-char-race"></span> <span id="d-char-class"></span></p>
+                <p>HP: <span id="d-char-hp"></span></p>
+                <p><span id="d-char-attack"></span></p>
+            </div>
+        </div>
+        <div class="col s2" id="button-holder"></div>
+        <div class="col s5 poke-combatant">
+            <span id="poke-combatant-img"></span>
+            <div class="combatant-data">
+                <p><span id="poke-name"></span>
+                <p>HP: <span id="poke-hp"></span></p>
+                <p>Attack: <span id="poke-attack"></span></p>
+            </div>
+        </div>
+      </div>
+      <div id="battle-narration"></div>
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
     <script src='./assets/js/script.js'></script>
     <script src='./assets/js/game-mechanics.js'></script>
 </body>
+
 </html>

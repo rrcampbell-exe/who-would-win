@@ -36,7 +36,7 @@ Ryan R. Campbell - Game Engine Designer
 
 Jonathan Cano - CSS Designer
 * [Jonathan Cano on GitHub](https://github.com/JonnyCano)
-* [Jonathan Cano's Portfolio]()
+* [Jonathan Cano's Portfolio](https://jonnycano.github.io/brazil/)
 
 Jeff Knoespel - Parallax, Scoreboard, and Button Effects
 * [Jeff Knoespel on GitHub](https://github.com/jeffywk)

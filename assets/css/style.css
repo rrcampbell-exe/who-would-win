@@ -7,6 +7,14 @@
     box-sizing: border-box;
 }
 
+h1 {
+    font-size: 8vw;
+}
+
+.game-title-wrapper {
+    text-align: center;
+}
+
 body {
     background-color: var(--main-color);
     font-family: 'Russo One', sans-serif;
@@ -109,10 +117,20 @@ h1, h2, h3, h4, h5, h6, strong {
     text-transform: capitalize;
 }
 
-h1 {
-    font-size: 8vw;
+footer {
+    text-align: center;
+    margin: 10px;
 }
 
-.game-title-wrapper {
-    text-align: center;
+footer a {
+    color: white;
+    border-bottom: .5px solid white; 
+    transition-duration: 0.5s;
+}
+
+footer a:hover {
+    color: var(--main-color);
+    letter-spacing: 1px;
+    border-bottom: .5px solid var(--main-color); 
+    transition-duration: 0.5s;
 }

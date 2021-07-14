@@ -75,6 +75,7 @@ h1, h2, h3, h4, h5, h6, strong {
 #battle-narration {
     display: none;
     font-size: 2vw;
+    margin-bottom: 10px;
 }
 
 #d-combatant-img, #poke-combatant-img {

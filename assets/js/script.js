@@ -327,16 +327,28 @@ function pokeMovePower(moveUrl) {
         })
 }
 
-// INITIAL DISPLAY FUNCTION
+// INITIAL DISPLAY FUNCTIONS
+
+// combat container display
 function combatContainerDisp() {
       $(document).ready(function() {
           $(".combat-container").fadeIn(2000);
     })
 }
+// display footer
+function seeFooter () {
+    $("footer").fadeIn(2500);
+}
+
+// hide footer
+function hideFooter () {
+    $("footer").css("display", "none");
+}
 
 // RUNNING OF FUNCTIONS ON PAGE LOAD
 
 setTimeout(combatContainerDisp, 500)
+setTimeout(seeFooter, 500)
 
 // d&d character functions
 dRace();

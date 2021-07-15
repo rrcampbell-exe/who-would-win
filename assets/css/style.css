@@ -94,7 +94,6 @@ h1, h2, h3, h4, h5, h6, strong {
 
 .fighter-image {
     width: 55%;
-    /* margin: -5% 0 -5% 0; */
 }
 
 .button-container {
@@ -122,18 +121,19 @@ h1, h2, h3, h4, h5, h6, strong {
 footer {
     text-align: center;
     margin-top: 3%;
+    display: none;
 }
 
 footer a {
     color: white;
+    font-size: 1.4vw;
     border-bottom: .5px solid white; 
     transition-duration: 0.5s;
-    font-size: 1.4vw;
 }
 
 footer a:hover {
-    color: var(--main-color);
+    color: white;
     letter-spacing: 1px;
-    border-bottom: .5px solid var(--main-color); 
+    border-bottom: .5px solid white; 
     transition-duration: 0.5s;
 }

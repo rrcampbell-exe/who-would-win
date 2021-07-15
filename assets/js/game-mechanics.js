@@ -32,18 +32,7 @@ function seeBattleBox() {
 
 // hide battle-narration box
 function hideBattleBox() {
-    $("#battle-narration").fadeOut(200);
-
-}
-
-// display footer
-function seeFooter () {
-    $("footer").fadeIn(2500);
-}
-
-// hide footer
-function hideFooter () {
-    $("footer").fadeOut(200);
+    $("#battle-narration").fadeOut(100);
 }
 
 // FUNCTIONS FOR GAMEPLAY
@@ -51,7 +40,7 @@ function hideFooter () {
 // designate first move
 function firstMove() {
     hideFooter()
-    setTimeout(seeBattleBox, 200)
+    seeBattleBox()
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
         pokeAttack();
     } else {

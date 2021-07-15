@@ -36,16 +36,25 @@ function hideBattleBox() {
 
 }
 
+// display footer
+function seeFooter () {
+    $("footer").fadeIn(2500);
+}
+
+// hide footer
+function hideFooter () {
+    $("footer").fadeOut(200);
+}
+
 // FUNCTIONS FOR GAMEPLAY
 
 // designate first move
 function firstMove() {
-    seeBattleBox()
+    hideFooter()
+    setTimeout(seeBattleBox, 200)
     if (pokeInfo.pokeSpeed > dCharInfo.characterSpeed) {
-        console.log(pokeInfo.pokeName + " attacks first!")
         pokeAttack();
     } else {
-        console.log("The " + dCharInfo.characterClass + " attacks first!")
         dAttackMove();
     }
 };
@@ -118,9 +127,6 @@ function pokeAttack() {
         dHpDisp.textContent = 0
     } 
 
-    // display updated d&d character HP value
-    console.log("The " + dCharInfo.characterClass + " now has " + dCharInfo.characterHp + " HP remaining!")
-
     // continue to d&d attack if d&d character has HP remaining
     if (dCharInfo.characterHp > 0) {
         nextDndRound();
@@ -159,7 +165,6 @@ function dWeaponAttack() {
     } else {
         pokeHpDisp.textContent = 0
     }
-    console.log(pokeInfo.pokeName + " now has " + pokeInfo.pokeHp + " HP remaining!")
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
@@ -181,7 +186,6 @@ function dSpellAttack() {
     // display attack damage on screen
     battleDispEl.textContent = ""
     battleDispEl.textContent = "The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!"
-    console.log("The " + dCharInfo.characterClass + " does " + dAttackDamage + " HP of damage with " + dCharInfo.characterAttackName + "!")
 
     // update pokemon character HP value
     pokeInfo.pokeHp = pokeInfo.pokeHp - dAttackDamage
@@ -190,7 +194,6 @@ function dSpellAttack() {
     } else {
         pokeHpDisp.textContent = 0
     }
-    console.log(pokeInfo.pokeName + " now has " + pokeInfo.pokeHp + " HP remaining!")
 
     // continue to pokemon attack if pokemon has HP remaining
     if (pokeInfo.pokeHp > 0) {
@@ -273,6 +276,7 @@ function playAgain() {
     scoreBoardEl.style.display = "flex"
     
     combatContainerOffOn();
+    seeFooter();
     
     // d&d character functions
     setTimeout(dRace, 300)

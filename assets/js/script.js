@@ -208,7 +208,7 @@ function dSpellPower(spellIndex) {
 // establish pokemon from gen 1
 function pokeChoice() {
     // choose pokemon from original 151 (gen 1)
-    var randomPoke = Math.ceil(Math.random() * 151)
+    var randomPoke = Math.floor(Math.random() * 152)
     let pokeApi = `https://pokeapi.co/api/v2/pokemon/${randomPoke}/`
     fetch(pokeApi)
         .then(res => res.json())
@@ -232,7 +232,6 @@ function pokeChoice() {
 
 // handle edge case of mr. mime, as pokeChoice will otherwise render the name as "Mr"
 function adjustPokeName(mrMime) {
-    console.log(mrMime)
     if (mrMime == "Mr") {
         mrMime = mrMime + ". Mime"
         let pokeNameDispEl = document.querySelector("#poke-name")
@@ -243,7 +242,6 @@ function adjustPokeName(mrMime) {
 // establish pokemon image
 function pokeImage(pokemon) {
     let chosenPokeApi = "https://pokeapi.co/api/v2/pokemon/" + pokemon + "/"
-    console.log(chosenPokeApi)
     fetch (chosenPokeApi)
         .then(res => res.json())
         .then(data => {
@@ -351,7 +349,7 @@ pokeChoice();
 console.log(pokeInfo);
 
 // parallax function
-let parallax = function() {
+function parallax() {
 
     var parallax = document.querySelectorAll("body"),
         speed = 0.15;
